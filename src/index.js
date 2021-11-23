@@ -11,6 +11,8 @@ import Layout from "./components/Layout/Layout";
 import rootReducer from "./redux/reducers";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 
+import { BrowserRouter } from "react-router-dom";
+
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export const client = new ApolloClient({
@@ -20,9 +22,11 @@ export const client = new ApolloClient({
 
 ReactDOM.render(
   <Provider store={store}>
-    <Layout>
-      <App />
-    </Layout>
+    <BrowserRouter>
+      <Layout>
+        <App />
+      </Layout>
+    </BrowserRouter>
   </Provider>,
   document.getElementById("root")
 );

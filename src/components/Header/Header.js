@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import { CartOutline } from "react-ionicons";
 import classes from "./Header.module.css";
 
+import { NavLink as Link } from "react-router-dom";
+
+import { connect } from "react-redux";
+
 import CategoryName from "./CategoryName";
+import Currency from "./Currency";
 
 import { ChevronUpOutline } from "react-ionicons";
 import { ChevronDownOutline } from "react-ionicons";
@@ -21,9 +26,21 @@ export class Header extends Component {
       <div className={classes.mainContainer}>
         <nav className={classes.nav}>
           <ul className={classes.list}>
-            <li className={classes.links}>Woman</li>
-            <li className={classes.links}>Men</li>
-            <li className={classes.links}>Kids</li>
+            <li className={classes.links}>
+              <Link to="/" activeClassName={classes.active}>
+                Woman
+              </Link>
+            </li>
+            <li className={classes.links}>
+              <Link to="/men" activeClassName={classes.active}>
+                Men
+              </Link>
+            </li>
+            <li className={classes.links}>
+              <Link to="/kids" activeClassName={classes.active}>
+                Kids
+              </Link>
+            </li>
           </ul>
 
           <img
@@ -38,17 +55,21 @@ export class Header extends Component {
             <div className={classes.currency} onClick={this.toggleHandler}>
               <img src="/images/dollar.png" alt="dollar" />
               {this.state.currencyToggle ? (
-                <ChevronUpOutline color={"#00000"} height="23px" width="18px" />
-              ) : (
                 <ChevronDownOutline
                   color={"#00000"}
                   height="23px"
                   width="18px"
                 />
+              ) : (
+                <ChevronUpOutline color={"#00000"} height="23px" width="18px" />
+              )}
+              {this.state.currencyToggle && (
+                <Currency products={this.props.products} />
               )}
             </div>
-
-            <CartOutline color={"#00000"} height="20px" width="18px" />
+            <div>
+              <CartOutline color={"#00000"} height="20px" width="18px" />
+            </div>
           </div>
         </nav>
         <CategoryName />
@@ -57,4 +78,10 @@ export class Header extends Component {
   }
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    products: state.products.data,
+  };
+};
+
+export default connect(mapStateToProps)(Header);

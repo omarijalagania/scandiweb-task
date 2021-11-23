@@ -1,13 +1,17 @@
 import React, { Component } from "react";
+import { Routes, Route } from "react-router";
 
 import Home from "./components/Home/Home";
+import NotFound from "./components/NotFound/NotFound";
 
 class App extends Component {
   render() {
     return (
-      <>
-        <Home />
-      </>
+      <Routes>
+        <Route path="/" element={<App />}></Route>
+        <Route index element={<Home />}></Route>
+        <Route path="*" element={<NotFound />}></Route>
+      </Routes>
     );
   }
 }

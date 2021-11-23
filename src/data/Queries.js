@@ -7,6 +7,7 @@ export const GET_CATEGORY = gql`
         name
         id
         gallery
+        inStock
         prices {
           currency
           amount
