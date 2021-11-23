@@ -4,6 +4,8 @@ import { gql } from "@apollo/client";
 import { GET_CATEGORY } from "../../data/Queries";
 import { client } from "../../index";
 
+import { Link } from "react-router-dom";
+
 import classes from "./Products.module.css";
 import Product from "./Product";
 
@@ -28,7 +30,11 @@ export class Products extends Component {
       <div className={classes.parent}>
         {this.props.products ? (
           this.props.products.map((product) => {
-            return <Product key={product.id} product={product} />;
+            return (
+              <Link to={`/product/${product.id}`}>
+                <Product key={product.id} product={product} />
+              </Link>
+            );
           })
         ) : (
           <p>Loading...</p>
