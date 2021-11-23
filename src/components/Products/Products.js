@@ -5,14 +5,12 @@ import { GET_CATEGORY } from "../../data/Queries";
 import { client } from "../../index";
 
 import classes from "./Products.module.css";
-
 import Product from "./Product";
 
-export class Products extends Component {
-  state = {
-    products: [],
-  };
+import { connect } from "react-redux";
+import { getProductsAction } from "../../redux/actions/";
 
+export class Products extends Component {
   componentDidMount = async () => {
     client
       .query({
@@ -21,19 +19,35 @@ export class Products extends Component {
         `,
       })
       .then((result) =>
-        this.setState({ products: result.data.category.products })
+        this.props.getProductsAction(result.data.category.products)
       );
   };
 
   render() {
     return (
       <div className={classes.parent}>
-        {this.state.products.map((product) => {
-          return <Product key={product.id} product={product} />;
-        })}
+        {this.props.products ? (
+          this.props.products.map((product) => {
+            return <Product key={product.id} product={product} />;
+          })
+        ) : (
+          <p>Loading...</p>
+        )}
       </div>
     );
   }
 }
 
-export default Products;
+const mapStateToProps = (state) => {
+  return {
+    products: state.products.data,
+  };
+};
+
+const mapDispatchToProps = () => {
+  return {
+    getProductsAction,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps())(Products);
