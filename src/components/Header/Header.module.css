@@ -1,0 +1,52 @@
+.mainContainer {
+  width: 1238px;
+  margin: 0 auto;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1200px;
+  padding: 20px 0;
+}
+
+.greenCart {
+  position: absolute;
+  right: 50%;
+  transform: translate(-50%);
+}
+
+.list {
+  display: flex;
+  list-style: none;
+}
+
+.active {
+  color: var(--primary-green);
+}
+
+.active::after {
+  width: 65px;
+  height: 2px;
+  color: var(--primary-green);
+}
+
+.links {
+  margin-left: 20px;
+  text-transform: uppercase;
+}
+
+.links:first-child {
+  margin: 0;
+}
+
+.cartContainer {
+  display: flex;
+  align-items: center;
+}
+
+.currency {
+  margin-right: 20px;
+  cursor: pointer;
+}
