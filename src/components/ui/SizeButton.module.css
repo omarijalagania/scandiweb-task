@@ -1,0 +1,8 @@
+.btn {
+  width: 57px;
+  height: 43px;
+  cursor: pointer;
+  background-color: white;
+  outline: none;
+  border: 1px solid var(--black);
+}

@@ -9,6 +9,8 @@
   align-items: center;
   width: 1238px;
   padding: 20px 0;
+  position: relative;
+  z-index: 9999;
 }
 
 .list {
@@ -52,6 +54,7 @@
 .cartContainer {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .currency {

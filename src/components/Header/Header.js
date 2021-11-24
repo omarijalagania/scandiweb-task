@@ -6,15 +6,18 @@ import { NavLink as Link } from "react-router-dom";
 
 import { connect } from "react-redux";
 
-import CategoryName from "./CategoryName";
 import Currency from "./Currency";
+import Cart from "./Cart";
+import OverLay from "../ui/OverLay";
 
 import { ChevronUpOutline } from "react-ionicons";
 import { ChevronDownOutline } from "react-ionicons";
+import CartStatusIcon from "./CartStatusIcon";
 
 export class Header extends Component {
   state = {
     currencyToggle: false,
+    cartToggle: false,
   };
 
   toggleHandler = () => {
@@ -22,6 +25,10 @@ export class Header extends Component {
   };
 
   render() {
+    const cartToggleHandler = () => {
+      this.setState({ cartToggle: !this.state.cartToggle });
+    };
+
     return (
       <div className={classes.mainContainer}>
         <nav className={classes.nav}>
@@ -68,11 +75,21 @@ export class Header extends Component {
               )}
             </div>
             <div>
-              <CartOutline color={"#00000"} height="20px" width="18px" />
+              <CartOutline
+                color={"#00000"}
+                height="25px"
+                width="21px"
+                onClick={cartToggleHandler}
+              />
             </div>
+            {this.state.cartToggle ? (
+              <Cart cartToggleHandler={cartToggleHandler} />
+            ) : (
+              ""
+            )}
+            {this.state.cartToggle ? <CartStatusIcon /> : ""}
           </div>
         </nav>
-        <CategoryName />
       </div>
     );
   }
