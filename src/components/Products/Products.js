@@ -13,15 +13,13 @@ import { getProductsAction } from "../../redux/actions/";
 
 export class Products extends Component {
   componentDidMount = async () => {
-    client
-      .query({
-        query: gql`
-          ${GET_CATEGORY}
-        `,
-      })
-      .then((result) =>
-        this.props.getProductsAction(result.data.category.products)
-      );
+    const response = await client.query({
+      query: gql`
+        ${GET_CATEGORY}
+      `,
+    });
+
+    this.props.getProductsAction(response.data.category.products);
   };
 
   render() {

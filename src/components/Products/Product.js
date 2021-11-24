@@ -11,6 +11,7 @@ export class Product extends Component {
   render() {
     return (
       <Link
+        onClick={() => this.props.getIdsAction(this.props.product.id)}
         to={
           this.props.product.inStock ? `/product/${this.props.product.id}` : ""
         }
@@ -50,4 +51,4 @@ const mapDispatchToProps = () => {
   };
 };
 
-export default connect(mapDispatchToProps)(Product);
+export default connect(null, mapDispatchToProps())(Product);
