@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import classes from "./Product.module.css";
 
+import { currencySymbol } from "../ui/Symbol";
+
 import { getIdsAction } from "../../redux/actions";
 import { connect } from "react-redux";
 
@@ -15,27 +17,10 @@ export class Product extends Component {
     );
     //change amount by currency
     let amount = filteredCurrency.map((item) => item.amount);
-    let symbol = "";
-    //Switch currency icon
-    switch (this.props.price) {
-      case "USD":
-        symbol = "$";
-        break;
-      case "GBP":
-        symbol = "£";
-        break;
-      case "AUD":
-        symbol = "$";
-        break;
-      case "JPY":
-        symbol = "¥";
-        break;
-      case "RUB":
-        symbol = "₽";
-        break;
-      default:
-        symbol = "$";
-    }
+
+    //function to switch currency, locates at ui folder
+    let symbol = currencySymbol(this.props.price);
+
     return (
       <Link
         onClick={() => this.props.getIdsAction(this.props.product.id)}

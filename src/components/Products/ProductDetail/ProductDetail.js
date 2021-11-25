@@ -3,7 +3,9 @@ import React, { Component } from "react";
 import classes from "./ProductDetail.module.css";
 
 import { connect } from "react-redux";
+
 import SizeButton from "../../ui/SizeButton";
+import { currencySymbol } from "../../ui/Symbol";
 
 class ProductDetail extends Component {
   render() {
@@ -17,28 +19,10 @@ class ProductDetail extends Component {
     );
     //change amount by currency
     let amount = filteredCurrency.map((item) => item.amount);
-    let symbol = "";
+
     //Switch currency icon
-    switch (this.props.price) {
-      case "USD":
-        symbol = "$";
-        break;
-      case "GBP":
-        symbol = "£";
-        break;
-      case "AUD":
-        symbol = "$";
-        break;
-      case "JPY":
-        symbol = "¥";
-        break;
-      case "RUB":
-        symbol = "₽";
-        break;
-      default:
-        symbol = "$";
-    }
-    console.log(filteredData);
+    let symbol = currencySymbol(this.props.price);
+
     return filteredData.map((item) => {
       return (
         <div className={classes.container}>

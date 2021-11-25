@@ -6,6 +6,8 @@ import { NavLink as Link } from "react-router-dom";
 
 import { connect } from "react-redux";
 
+import { currencySymbol } from "../ui/Symbol";
+
 import Currency from "./Currency";
 import Cart from "./Cart";
 
@@ -24,6 +26,9 @@ export class Header extends Component {
   };
 
   render() {
+    //icon change for currency
+    let symbol = currencySymbol(this.props.price[0].currency);
+
     const cartToggleHandler = () => {
       this.setState({ cartToggle: !this.state.cartToggle });
     };
@@ -42,7 +47,7 @@ export class Header extends Component {
           to={`${category}`}
           className={({ isActive }) => (isActive ? classes.active : undefined)}
         >
-          {category}{" "}
+          {category}
         </Link>
       </li>
     ));
@@ -60,8 +65,8 @@ export class Header extends Component {
             />
           </Link>
           <div className={classes.cartContainer}>
+            {symbol}
             <div className={classes.currency} onClick={this.toggleHandler}>
-              <img src="/images/dollar.png" alt="dollar" />
               {this.state.currencyToggle ? (
                 <ChevronDownOutline
                   color={"#00000"}
@@ -99,6 +104,7 @@ export class Header extends Component {
 const mapStateToProps = (state) => {
   return {
     products: state.products.data,
+    price: state.products.price,
   };
 };
 

@@ -7,6 +7,7 @@ import { getPrice } from "../../redux/actions";
 
 export class Currency extends Component {
   render() {
+    //Price Handler Function for Dispatch currency
     const priceHandler = (currency = "USD") => {
       if (currency === "USD") {
         const filter = this.props.products[0].prices.filter(
