@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 
 import Currency from "./Currency";
 import Cart from "./Cart";
-import OverLay from "../ui/OverLay";
 
 import { ChevronUpOutline } from "react-ionicons";
 import { ChevronDownOutline } from "react-ionicons";
@@ -28,36 +27,38 @@ export class Header extends Component {
     const cartToggleHandler = () => {
       this.setState({ cartToggle: !this.state.cartToggle });
     };
+    //array for categories
+    let categ = [];
 
+    //extract categories from products
+    this.props.products.map((item) => categ.push(item.category));
+    //Remove Duplicates
+    let uniqueChars = [...new Set(categ)];
+
+    //Render categories
+    let filteredCategories = uniqueChars.map((category) => (
+      <li className={classes.links}>
+        <Link
+          to={`${category}`}
+          className={({ isActive }) => (isActive ? classes.active : undefined)}
+        >
+          {category}{" "}
+        </Link>
+      </li>
+    ));
     return (
       <div className={classes.mainContainer}>
         <nav className={classes.nav}>
-          <ul className={classes.list}>
-            <li className={classes.links}>
-              <Link to="/" activeClassName={classes.active}>
-                Woman
-              </Link>
-            </li>
-            <li className={classes.links}>
-              <Link to="/men" activeClassName={classes.active}>
-                Men
-              </Link>
-            </li>
-            <li className={classes.links}>
-              <Link to="/kids" activeClassName={classes.active}>
-                Kids
-              </Link>
-            </li>
-          </ul>
-
-          <img
-            className={classes.greenCart}
-            src="/images/cart.png"
-            height="30px"
-            width="30px"
-            alt="cart"
-          />
-
+          <ul className={classes.list}>{filteredCategories}</ul>
+          <Link to="/">
+            <img
+              className={classes.greenCart}
+              src="/images/cart.png"
+              height="30px"
+              width="30px"
+              alt="cart"
+            />
+          </Link>
           <div className={classes.cartContainer}>
             <div className={classes.currency} onClick={this.toggleHandler}>
               <img src="/images/dollar.png" alt="dollar" />

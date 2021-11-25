@@ -13,6 +13,11 @@
   z-index: 9999;
 }
 
+.nav a {
+  outline: none;
+  text-decoration: none;
+}
+
 .list {
   display: flex;
   list-style: none;
@@ -21,26 +26,24 @@
 .greenCart {
   position: absolute;
   left: 50%;
+  bottom: 22px;
   transform: translate(-50%);
 }
 
 .active {
-  background-color: var(--primary-green);
+  color: var(--primary-green);
+  padding-bottom: 7px;
+  border-bottom: 3px solid var(--primary-green);
 }
 
 .links {
   margin-left: 20px;
+
   text-transform: uppercase;
 }
 
 .links a {
   text-decoration: none;
-}
-
-.links a:hover {
-  color: var(--primary-green);
-  padding-bottom: 10px;
-  border-bottom: 3px solid var(--primary-green);
 }
 
 .links a:checked {

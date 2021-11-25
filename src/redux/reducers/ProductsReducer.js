@@ -1,6 +1,11 @@
 const initialState = {
   id: "",
   data: [],
+  price: [
+    {
+      currency: "USD",
+    },
+  ],
 };
 
 const ProductsReducer = (state = initialState, action) => {
@@ -16,7 +21,11 @@ const ProductsReducer = (state = initialState, action) => {
         ...state,
         data: action.payload,
       };
-
+    case "GET_PRICE":
+      return {
+        ...state,
+        price: action.payload,
+      };
     default:
       return state;
   }

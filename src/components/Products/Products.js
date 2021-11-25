@@ -25,7 +25,7 @@ export class Products extends Component {
   render() {
     return (
       <>
-        <CategoryName>Products</CategoryName>
+        <CategoryName>All Products</CategoryName>
         <div className={classes.parent}>
           {this.props.products ? (
             this.props.products.map((product) => {

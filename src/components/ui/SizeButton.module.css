@@ -5,4 +5,9 @@
   background-color: white;
   outline: none;
   border: 1px solid var(--black);
+  margin: 0 10px;
+}
+
+.btn:first-child {
+  margin-left: 0;
 }

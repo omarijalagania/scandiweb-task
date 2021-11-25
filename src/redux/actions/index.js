@@ -11,3 +11,10 @@ export const getIdsAction = (value) => {
     payload: value,
   };
 };
+
+export const getPrice = (value) => {
+  return {
+    type: "GET_PRICE",
+    payload: value,
+  };
+};

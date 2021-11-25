@@ -9,6 +9,33 @@ import { connect } from "react-redux";
 
 export class Product extends Component {
   render() {
+    //Filter Currency with chousen currency
+    let filteredCurrency = this.props.product.prices.filter(
+      (item) => item.currency == this.props.price
+    );
+    //change amount by currency
+    let amount = filteredCurrency.map((item) => item.amount);
+    let symbol = "";
+    //Switch currency icon
+    switch (this.props.price) {
+      case "USD":
+        symbol = "$";
+        break;
+      case "GBP":
+        symbol = "£";
+        break;
+      case "AUD":
+        symbol = "$";
+        break;
+      case "JPY":
+        symbol = "¥";
+        break;
+      case "RUB":
+        symbol = "₽";
+        break;
+      default:
+        symbol = "$";
+    }
     return (
       <Link
         onClick={() => this.props.getIdsAction(this.props.product.id)}
@@ -37,7 +64,8 @@ export class Product extends Component {
           )}
           <p className={classes.title}>{this.props.product.name}</p>
           <p className={classes.price}>
-            $ {this.props.product.prices[0].amount}
+            {symbol}
+            {amount}
           </p>
         </div>
       </Link>
@@ -45,10 +73,16 @@ export class Product extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    price: state.products.price[0].currency,
+  };
+};
+
 const mapDispatchToProps = () => {
   return {
     getIdsAction,
   };
 };
 
-export default connect(null, mapDispatchToProps())(Product);
+export default connect(mapStateToProps, mapDispatchToProps())(Product);
