@@ -69,11 +69,11 @@ export class Header extends Component {
               {this.state.currencyToggle ? (
                 <ChevronDownOutline
                   color={"#00000"}
-                  height="23px"
-                  width="18px"
+                  height="19px"
+                  width="15px"
                 />
               ) : (
-                <ChevronUpOutline color={"#00000"} height="23px" width="18px" />
+                <ChevronUpOutline color={"#00000"} height="19px" width="15px" />
               )}
               {this.state.currencyToggle && (
                 <Currency products={this.props.products} />
@@ -93,6 +93,7 @@ export class Header extends Component {
               ""
             )}
             <div
+              onClick={cartToggleHandler}
               style={{ opacity: this.state.cartToggle ? "1" : "0" }}
               className={classes.statusContainer}
             >

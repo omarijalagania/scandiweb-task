@@ -22,7 +22,7 @@ export class Product extends Component {
     //function to switch currency, locates at ui folder
     let symbol = currencySymbol(this.props.price);
 
-    const addToCartHandler = (event, productId) => {
+    const addToCartHandler = (productId) => {
       const forCart = this.props.products.filter(
         (item) => item.id === productId
       );
@@ -51,7 +51,7 @@ export class Product extends Component {
           {this.props.product.inStock ? (
             <span className={classes.smallCart}>
               <img
-                onClick={(e) => addToCartHandler(e, this.props.product.id)}
+                onClick={addToCartHandler.bind(null, this.props.product.id)}
                 className={classes.cartCircle}
                 id="circle"
                 src="/images/circle.png"
