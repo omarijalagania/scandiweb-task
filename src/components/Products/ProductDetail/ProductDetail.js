@@ -15,7 +15,7 @@ class ProductDetail extends Component {
     );
     //Filter Currency with chousen currency
     let filteredCurrency = filteredData[0].prices.filter(
-      (item) => item.currency == this.props.price
+      (item) => item.currency === this.props.price
     );
     //change amount by currency
     let amount = filteredCurrency.map((item) => item.amount);
@@ -25,11 +25,11 @@ class ProductDetail extends Component {
 
     return filteredData.map((item) => {
       return (
-        <div className={classes.container}>
+        <div key={item.id} className={classes.container}>
           <div className={classes.imageContainer}>
             <div className={classes.smallImages}>
               {item.gallery.slice(0, 3).map((image) => (
-                <img src={image} alt={item.name} />
+                <img key={image} src={image} alt={item.name} />
               ))}
             </div>
             <div className={classes.bigImage}>
@@ -45,7 +45,9 @@ class ProductDetail extends Component {
               <div className={classes.btnGroup}>
                 {item.attributes.length > 0 ? (
                   item.attributes[0].items.map((size) => (
-                    <SizeButton>{size.displayValue}</SizeButton>
+                    <SizeButton key={size.displayValue}>
+                      {size.displayValue}
+                    </SizeButton>
                   ))
                 ) : (
                   <p>No Attributes</p>

@@ -13,7 +13,6 @@ export class Currency extends Component {
         const filter = this.props.products[0].prices.filter(
           (item) => item.currency === "USD"
         );
-        console.log(this.props.products);
         this.props.getPrice(filter);
       }
       if (currency === "GBP") {

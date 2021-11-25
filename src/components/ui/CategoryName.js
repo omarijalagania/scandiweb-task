@@ -3,16 +3,16 @@ import React, { Component } from "react";
 export class CategoryName extends Component {
   render() {
     return (
-      <h1
+      <div
         style={{
-          width: "1238px",
+          maxWidth: "1238px",
           margin: "80px auto",
           padding: "0 20px",
           fontWeight: "400",
         }}
       >
-        {this.props.children}
-      </h1>
+        <h1>{this.props.children}</h1>
+      </div>
     );
   }
 }

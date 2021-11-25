@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import classes from "./CartPage.module.css";
 
+import { connect } from "react-redux";
+
 import CategoryName from "../ui/CategoryName";
 import SizeButton from "../ui/SizeButton";
 
@@ -66,4 +68,10 @@ export class CartPage extends Component {
   }
 }
 
-export default CartPage;
+const mapStateToProps = (state) => {
+  return {
+    cart: state.products.cart,
+  };
+};
+
+export default connect(mapStateToProps)(CartPage);

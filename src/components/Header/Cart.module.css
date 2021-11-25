@@ -4,7 +4,7 @@
   padding: 4px;
   top: 68px;
   right: 18px;
-  width: 325px;
+  width: 250px;
   border: 1px solid black;
 }
 
@@ -79,7 +79,7 @@
 }
 
 .btns button {
-  width: 140px;
+  width: 100px;
   height: 40px;
   outline: none;
   text-transform: uppercase;

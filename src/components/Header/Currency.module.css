@@ -11,10 +11,12 @@
   z-index: 99;
   -webkit-box-shadow: -1px 3px 15px -2px #000000;
   box-shadow: -1px 3px 15px -2px #e4e4e4;
+  transition: 0.3s ease;
 }
 
 .currency:hover {
   text-align: center;
   width: 100%;
   background-color: var(--primary-green);
+  transition: 0.3s ease;
 }

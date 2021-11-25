@@ -13,7 +13,6 @@ import Cart from "./Cart";
 
 import { ChevronUpOutline } from "react-ionicons";
 import { ChevronDownOutline } from "react-ionicons";
-import CartStatusIcon from "./CartStatusIcon";
 
 export class Header extends Component {
   state = {
@@ -42,7 +41,7 @@ export class Header extends Component {
 
     //Render categories
     let filteredCategories = uniqueChars.map((category) => (
-      <li className={classes.links}>
+      <li key={category} className={classes.links}>
         <Link
           to={`${category}`}
           className={({ isActive }) => (isActive ? classes.active : undefined)}
@@ -93,7 +92,12 @@ export class Header extends Component {
             ) : (
               ""
             )}
-            {this.state.cartToggle ? <CartStatusIcon /> : ""}
+            <div
+              style={{ opacity: this.state.cartToggle ? "1" : "0" }}
+              className={classes.statusContainer}
+            >
+              {this.props.cart.length >= 0 ? this.props.cart.length : "0"}
+            </div>
           </div>
         </nav>
       </div>
@@ -105,6 +109,7 @@ const mapStateToProps = (state) => {
   return {
     products: state.products.data,
     price: state.products.price,
+    cart: state.products.cart,
   };
 };
 

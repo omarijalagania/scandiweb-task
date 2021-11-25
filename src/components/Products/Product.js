@@ -7,19 +7,27 @@ import classes from "./Product.module.css";
 import { currencySymbol } from "../ui/Symbol";
 
 import { getIdsAction } from "../../redux/actions";
+import { cartAction } from "../../redux/actions";
 import { connect } from "react-redux";
 
 export class Product extends Component {
   render() {
-    //Filter Currency with chousen currency
+    //Filter Currency with chousen icon currency
     let filteredCurrency = this.props.product.prices.filter(
-      (item) => item.currency == this.props.price
+      (item) => item.currency === this.props.price
     );
     //change amount by currency
     let amount = filteredCurrency.map((item) => item.amount);
 
     //function to switch currency, locates at ui folder
     let symbol = currencySymbol(this.props.price);
+
+    const addToCartHandler = (event, productId) => {
+      const forCart = this.props.products.filter(
+        (item) => item.id === productId
+      );
+      this.props.cartAction(forCart);
+    };
 
     return (
       <Link
@@ -43,7 +51,9 @@ export class Product extends Component {
           {this.props.product.inStock ? (
             <span className={classes.smallCart}>
               <img
+                onClick={(e) => addToCartHandler(e, this.props.product.id)}
                 className={classes.cartCircle}
+                id="circle"
                 src="/images/circle.png"
                 alt="cart"
               />
@@ -65,12 +75,15 @@ export class Product extends Component {
 const mapStateToProps = (state) => {
   return {
     price: state.products.price[0].currency,
+    products: state.products.data,
+    cart: state.products.cart,
   };
 };
 
 const mapDispatchToProps = () => {
   return {
     getIdsAction,
+    cartAction,
   };
 };
 
