@@ -42,7 +42,11 @@ export class Product extends Component {
           )}
           {this.props.product.inStock ? (
             <span className={classes.smallCart}>
-              <img src="/images/circle.png" alt="cart" />
+              <img
+                className={classes.cartCircle}
+                src="/images/circle.png"
+                alt="cart"
+              />
             </span>
           ) : (
             ""

@@ -4,11 +4,13 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 116px;
+  width: 100px;
   height: 170px;
-
+  right: 30px;
   background-color: white;
   z-index: 99;
+  -webkit-box-shadow: -1px 3px 15px -2px #000000;
+  box-shadow: -1px 3px 15px -2px #e4e4e4;
 }
 
 .currency:hover {

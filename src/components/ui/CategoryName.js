@@ -3,7 +3,14 @@ import React, { Component } from "react";
 export class CategoryName extends Component {
   render() {
     return (
-      <h1 style={{ width: "1238px", margin: "80px auto", padding: "0 20px" }}>
+      <h1
+        style={{
+          width: "1238px",
+          margin: "80px auto",
+          padding: "0 20px",
+          fontWeight: "400",
+        }}
+      >
         {this.props.children}
       </h1>
     );
