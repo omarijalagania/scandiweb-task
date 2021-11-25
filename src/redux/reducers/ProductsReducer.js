@@ -6,6 +6,7 @@ const initialState = {
       currency: "USD",
     },
   ],
+  cart: [],
 };
 
 const ProductsReducer = (state = initialState, action) => {
@@ -25,6 +26,11 @@ const ProductsReducer = (state = initialState, action) => {
       return {
         ...state,
         price: action.payload,
+      };
+    case "ADD_TO_CART":
+      return {
+        ...state,
+        cart: action.payload,
       };
     default:
       return state;

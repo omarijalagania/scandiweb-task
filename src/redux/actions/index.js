@@ -18,3 +18,10 @@ export const getPrice = (value) => {
     payload: value,
   };
 };
+
+export const cartAction = (value) => {
+  return {
+    type: "ADD_TO_CART",
+    payload: value,
+  };
+};

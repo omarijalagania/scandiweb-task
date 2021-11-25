@@ -1,7 +1,9 @@
 .parent {
   display: grid;
-  width: 1238px;
+  width: 100%;
+  max-width: 1238px;
   margin: 87px auto;
+  padding: 0, 20px;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr;
   grid-column-gap: 153px;

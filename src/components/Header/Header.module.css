@@ -1,5 +1,6 @@
 .mainContainer {
   width: 1238px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -7,8 +8,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1238px;
-  padding: 20px 0;
+  margin: 0 auto;
+  padding: 20px;
   position: relative;
   z-index: 9999;
 }
@@ -21,13 +22,6 @@
 .list {
   display: flex;
   list-style: none;
-}
-
-.greenCart {
-  position: absolute;
-  left: 50%;
-  bottom: 22px;
-  transform: translate(-50%);
 }
 
 .active {
