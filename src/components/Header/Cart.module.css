@@ -2,7 +2,7 @@
   position: absolute;
   background-color: white;
   padding: 4px;
-  top: 68px;
+  top: 0;
   right: 37px;
   width: 250px;
   -webkit-box-shadow: -1px 3px 15px -2px #000000;
@@ -100,9 +100,20 @@
   cursor: pointer;
 }
 
+.viewBtn:hover {
+  background-color: var(--black);
+  color: white;
+}
+
 .checkBtn {
   background: var(--primary-green);
   border: 0;
   cursor: pointer;
   color: white;
+}
+
+.checkBtn:hover {
+  color: var(--primary-green);
+  background-color: white;
+  border: 1px solid var(--primary-green);
 }

@@ -31,12 +31,14 @@ export class Product extends Component {
 
     return (
       <Link
+        style={{ zIndex: "99!important" }}
         onClick={() => this.props.getIdsAction(this.props.product.id)}
         to={
           this.props.product.inStock ? `/product/${this.props.product.id}` : ""
         }
       >
         <div
+          style={{ zIndex: "99" }}
           className={`${classes.div1} ${
             this.props.product.inStock ? null : classes.disabled
           }`}
@@ -49,8 +51,12 @@ export class Product extends Component {
             <div className={classes.outOfStock}>Out Of Stock</div>
           )}
           {this.props.product.inStock ? (
-            <span className={classes.smallCart}>
+            <span
+              style={{ zIndex: "999!important" }}
+              className={classes.smallCart}
+            >
               <img
+                style={{ zIndex: "999!important" }}
                 onClick={addToCartHandler.bind(null, this.props.product.id)}
                 className={classes.cartCircle}
                 id="circle"

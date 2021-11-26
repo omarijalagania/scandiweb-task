@@ -8,6 +8,10 @@ import SizeButton from "../../ui/SizeButton";
 import { currencySymbol } from "../../ui/Symbol";
 
 class ProductDetail extends Component {
+  state = {
+    activeBtn: false,
+  };
+
   render() {
     //Grab Prodict Object by id
     const filteredData = this.props.products.filter(
@@ -45,7 +49,10 @@ class ProductDetail extends Component {
               <div className={classes.btnGroup}>
                 {item.attributes.length > 0 ? (
                   item.attributes[0].items.map((size) => (
-                    <SizeButton key={size.displayValue}>
+                    <SizeButton
+                      value={size.displayValue}
+                      key={size.displayValue}
+                    >
                       {size.displayValue}
                     </SizeButton>
                   ))

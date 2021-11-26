@@ -6,11 +6,11 @@ export class SizeButton extends Component {
   render() {
     return (
       <button
-        className={classes.btn}
+        className={`${classes.btn}`}
         onClick={this.props.handleClick}
         {...this.props}
       >
-        {this.props.children}
+        {this.props.children} {console.log(this.props)}
       </button>
     );
   }

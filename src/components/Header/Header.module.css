@@ -36,6 +36,10 @@
   text-transform: uppercase;
 }
 
+.links a:hover {
+  color: var(--primary-green);
+}
+
 .links a {
   text-decoration: none;
 }

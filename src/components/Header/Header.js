@@ -18,6 +18,7 @@ export class Header extends Component {
   state = {
     currencyToggle: false,
     cartToggle: false,
+    lat: false,
   };
 
   toggleHandler = () => {
@@ -29,7 +30,10 @@ export class Header extends Component {
     let symbol = currencySymbol(this.props.price[0].currency);
 
     const cartToggleHandler = () => {
-      this.setState({ cartToggle: !this.state.cartToggle });
+      this.setState({
+        cartToggle: !this.state.cartToggle,
+        lat: !this.state.lat,
+      });
     };
     //array for categories
     let categ = [];
@@ -41,7 +45,7 @@ export class Header extends Component {
 
     //Render categories
     let filteredCategories =
-      uniqueChars.length != 0
+      uniqueChars.length !== 0
         ? uniqueChars.map((category) => (
             <li key={category} className={classes.links}>
               <Link
@@ -86,7 +90,7 @@ export class Header extends Component {
                 <Currency products={this.props.products} />
               )}
             </div>
-            <div>
+            <div style={{ zIndex: "9999" }}>
               <CartOutline
                 color={"#00000"}
                 height="25px"
@@ -95,7 +99,10 @@ export class Header extends Component {
               />
             </div>
             {this.state.cartToggle ? (
-              <Cart cartToggleHandler={cartToggleHandler} />
+              <Cart
+                cartToggleHandler={cartToggleHandler}
+                lat={this.state.lat}
+              />
             ) : (
               ""
             )}

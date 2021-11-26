@@ -8,6 +8,11 @@
   margin: 0 10px;
 }
 
+.btn:hover {
+  background-color: var(--black);
+  color: white;
+}
+
 .btn:first-child {
   margin-left: 0;
 }

@@ -13,7 +13,7 @@ export class CartPage extends Component {
       <>
         <CategoryName>Cart</CategoryName>
         <div className={classes.cartRow}>
-          {this.props.cart.length != 0 ? (
+          {this.props.cart.length !== 0 ? (
             this.props.cart.map((item) => <CartItem item={item} />)
           ) : (
             <h2>No Items</h2>
