@@ -30,7 +30,7 @@ const ProductsReducer = (state = initialState, action) => {
     case "ADD_TO_CART":
       return {
         ...state,
-        cart: [...state.cart, action.payload],
+        cart: state.cart.concat(action.payload),
       };
     default:
       return state;

@@ -4,11 +4,11 @@
   padding: 4px;
   top: 0;
   right: 37px;
-  width: 250px;
+  width: 270px;
   -webkit-box-shadow: -1px 3px 15px -2px #000000;
   box-shadow: -1px 3px 15px -2px #e4e4e4;
   transition: 0.3s ease;
-  z-index: 999;
+  z-index: 9;
 }
 
 .itemContainer {
@@ -30,8 +30,14 @@
   font-weight: 700;
 }
 
+.imagePreview {
+  display: flex;
+  align-items: center;
+}
+
 .imagePreview img {
-  height: 120px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
 }
 

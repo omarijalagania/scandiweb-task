@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import SizeButton from "../../ui/SizeButton";
 import { currencySymbol } from "../../ui/Symbol";
 
+import { cartAction } from "../../../redux/actions";
+
 class ProductDetail extends Component {
   state = {
     activeBtn: false,
@@ -18,11 +20,23 @@ class ProductDetail extends Component {
       (arr) => arr.id === this.props.id
     );
     //Filter Currency with chousen currency
-    let filteredCurrency = filteredData[0].prices.filter(
-      (item) => item.currency === this.props.price
-    );
+    let filteredCurrency =
+      filteredData.length !== 0
+        ? filteredData[0].prices.filter(
+            (item) => item.currency === this.props.price
+          )
+        : [];
     //change amount by currency
-    let amount = filteredCurrency.map((item) => item.amount);
+    let amount =
+      filteredCurrency.length !== 0
+        ? filteredCurrency.map((item) => item.amount)
+        : "<h1>No Products</h1>";
+
+    //add product to cart item
+    const addToCartHandler = () => {
+      this.props.cartAction(filteredData);
+      alert("Product Added To Card");
+    };
 
     //Switch currency icon
     let symbol = currencySymbol(this.props.price);
@@ -66,7 +80,9 @@ class ProductDetail extends Component {
               {symbol}
               {amount}
             </p>
-            <button className={classes.cartBtn}>Cart</button>
+            <button onClick={addToCartHandler} className={classes.cartBtn}>
+              Cart
+            </button>
             <p className={classes.description}>
               {item.description.replace(/(<([^>]+)>)/gi, "")}
             </p>
@@ -85,4 +101,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(ProductDetail);
+const mapDispatchToProps = () => {
+  return {
+    cartAction,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps())(ProductDetail);

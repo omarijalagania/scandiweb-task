@@ -10,7 +10,7 @@ export class SizeButton extends Component {
         onClick={this.props.handleClick}
         {...this.props}
       >
-        {this.props.children} {console.log(this.props)}
+        {this.props.children}
       </button>
     );
   }
