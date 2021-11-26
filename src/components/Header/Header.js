@@ -40,16 +40,21 @@ export class Header extends Component {
     let uniqueChars = [...new Set(categ)];
 
     //Render categories
-    let filteredCategories = uniqueChars.map((category) => (
-      <li key={category} className={classes.links}>
-        <Link
-          to={`${category}`}
-          className={({ isActive }) => (isActive ? classes.active : undefined)}
-        >
-          {category}
-        </Link>
-      </li>
-    ));
+    let filteredCategories =
+      uniqueChars.length != 0
+        ? uniqueChars.map((category) => (
+            <li key={category} className={classes.links}>
+              <Link
+                to={`${category}`}
+                className={({ isActive }) =>
+                  isActive ? classes.active : undefined
+                }
+              >
+                {category}
+              </Link>
+            </li>
+          ))
+        : "No categories";
     return (
       <div className={classes.mainContainer}>
         <nav className={classes.nav}>
@@ -64,16 +69,18 @@ export class Header extends Component {
             />
           </Link>
           <div className={classes.cartContainer}>
-            {symbol}
+            <p onClick={this.toggleHandler} style={{ padding: "5px" }}>
+              {symbol}
+            </p>
             <div className={classes.currency} onClick={this.toggleHandler}>
               {this.state.currencyToggle ? (
                 <ChevronDownOutline
                   color={"#00000"}
-                  height="19px"
-                  width="15px"
+                  height="15px"
+                  width="12px"
                 />
               ) : (
-                <ChevronUpOutline color={"#00000"} height="19px" width="15px" />
+                <ChevronUpOutline color={"#00000"} height="15px" width="12px" />
               )}
               {this.state.currencyToggle && (
                 <Currency products={this.props.products} />

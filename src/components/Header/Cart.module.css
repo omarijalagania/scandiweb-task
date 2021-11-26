@@ -3,9 +3,12 @@
   background-color: white;
   padding: 4px;
   top: 68px;
-  right: 18px;
+  right: 37px;
   width: 250px;
-  border: 1px solid black;
+  -webkit-box-shadow: -1px 3px 15px -2px #000000;
+  box-shadow: -1px 3px 15px -2px #e4e4e4;
+  transition: 0.3s ease;
+  z-index: 999;
 }
 
 .itemContainer {
@@ -28,7 +31,7 @@
 }
 
 .imagePreview img {
-  height: 80px;
+  height: 120px;
   object-fit: cover;
 }
 
@@ -36,13 +39,15 @@
   font-weight: 300;
   color: var(--black);
   margin: 5px 0;
+  font-size: 14px;
 }
 
 .quantity {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  padding: 5px;
 }
 
 .cartBtn {
@@ -50,11 +55,15 @@
   height: 28px;
   outline: none;
   margin-right: 7px;
+  border: 1px solid var(--black);
+  background-color: white;
 }
 
 .quantity button {
   width: 25px;
   height: 25px;
+  border: 1px solid var(--black);
+  background-color: white;
 }
 
 .total {

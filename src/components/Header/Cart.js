@@ -7,6 +7,9 @@ import { connect } from "react-redux";
 import classes from "./Cart.module.css";
 
 export class Cart extends Component {
+  state = {
+    productQuantity: 1,
+  };
   render() {
     return (
       <div className={classes.cartContainer}>
