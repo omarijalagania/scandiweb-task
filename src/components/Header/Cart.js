@@ -46,15 +46,12 @@ export class Cart extends Component {
     const PriceResult = extractFromArr.map((item) => item.amount);
 
     //total summ
-
     const total =
       PriceResult.length !== 0
         ? PriceResult.reduce(
             (a, b) => 1 * a + 1 * b //products sum
           )
         : 0;
-
-    console.log(total);
 
     return (
       <OverLay

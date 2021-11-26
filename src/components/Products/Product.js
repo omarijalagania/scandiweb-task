@@ -26,6 +26,7 @@ export class Product extends Component {
       const forCart = this.props.products.filter(
         (item) => item.id === productId
       );
+      // need prevent to add duplicates
       this.props.cartAction(forCart);
     };
 
