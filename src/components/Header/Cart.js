@@ -11,28 +11,15 @@ import OverLay from "../ui/OverLay";
 export class Cart extends Component {
   state = {
     totalPrice: 0,
+    quantity: 1,
+    items: [0],
+    quantityAmount: 0,
   };
-
-  // componentDidMount() {
-  //   if (this.props.cart.length > 1) {
-  //     const total = this.props.cart.reduce(
-  //       (a, b) => 1 * a.prices[0].amount + 1 * b.prices[0].amount //products sum
-  //     );
-  //     this.setState({
-  //       totalPrice: total,
-  //     });
-  //   } else {
-  //     this.setState({
-  //       totalPrice: this.props.cart.length > 0 ? this.state.totalPrice : 0,
-  //     });
-  //   }
-  // }
 
   render() {
     let symbol = currencySymbol(this.props.price);
 
     const amount = this.props.cart.map((item) => item);
-    //const arr = amount.map((item) => item);
 
     //check currency with Header currency
     const currencyCheck = amount.map((item) =>
@@ -42,7 +29,7 @@ export class Cart extends Component {
     const extractFromArr = currencyCheck.map(
       (item) => item[item.map((item, index) => index)]
     );
-    //final resul
+    //final result
     const PriceResult = extractFromArr.map((item) => item.amount);
 
     //total summ
@@ -53,11 +40,27 @@ export class Cart extends Component {
           )
         : 0;
 
+    const productQuantityHandler = (productId) => {
+      //get index of product in cart
+      const productIndex = this.props.cart.findIndex(
+        (item) => item.id === productId
+      );
+
+      //save price to state
+      this.setState((prevState) => ({
+        quantityAmount:
+          prevState.quantityAmount + currencyCheck[productIndex][0].amount,
+      }));
+
+      //add quantity for item number
+      this.setState({
+        items: [...this.state.items, "1"],
+      });
+      console.log(currencyCheck[productIndex][0].amount);
+    };
+
     return (
-      <OverLay
-        onClick={this.props.cartToggleHandler}
-        style={{ display: this.props.lat ? "block" : "none" }}
-      >
+      <OverLay style={{ display: this.props.lat ? "block" : "none" }}>
         <div className={classes.cartContainer}>
           <div className={classes.itemInfo}>
             <p> My bag </p>
@@ -84,8 +87,12 @@ export class Cart extends Component {
                   </div>
 
                   <div className={classes.quantity}>
-                    <button>+</button>
-                    <p>1</p>
+                    <button
+                      onClick={productQuantityHandler.bind(null, item.id)}
+                    >
+                      +
+                    </button>
+                    <p>{this.state.items.length}</p>
                     <button>-</button>
                   </div>
                   <div className={classes.imagePreview}>
@@ -101,7 +108,7 @@ export class Cart extends Component {
             <p>Total</p>
             <p>
               {symbol}
-              {total.toFixed(2)}
+              {(total + this.state.quantityAmount).toFixed(2)}
             </p>
           </div>
           <div className={classes.btns}>
