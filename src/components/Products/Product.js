@@ -28,18 +28,17 @@ export class Product extends Component {
       );
       // need prevent to add duplicates
       this.props.cartAction(forCart);
+      alert("Product added to card");
     };
 
     return (
       <Link
-        style={{ zIndex: "99!important" }}
         onClick={() => this.props.getIdsAction(this.props.product.id)}
         to={
           this.props.product.inStock ? `/product/${this.props.product.id}` : ""
         }
       >
         <div
-          style={{ zIndex: "99" }}
           className={`${classes.div1} ${
             this.props.product.inStock ? null : classes.disabled
           }`}
@@ -56,14 +55,15 @@ export class Product extends Component {
               style={{ zIndex: "999!important" }}
               className={classes.smallCart}
             >
-              <img
-                style={{ zIndex: "999!important" }}
-                onClick={addToCartHandler.bind(null, this.props.product.id)}
-                className={classes.cartCircle}
-                id="circle"
-                src="/images/circle.png"
-                alt="cart"
-              />
+              <Link to="">
+                <img
+                  onClick={addToCartHandler.bind(null, this.props.product.id)}
+                  className={classes.cartCircle}
+                  id="circle"
+                  src="/images/circle.png"
+                  alt="cart"
+                />
+              </Link>
             </span>
           ) : (
             ""
