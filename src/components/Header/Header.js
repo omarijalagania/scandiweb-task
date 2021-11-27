@@ -60,7 +60,7 @@ export class Header extends Component {
           ))
         : "No categories";
     return (
-      <div className={classes.mainContainer}>
+      <header className={classes.mainContainer}>
         <nav className={classes.nav}>
           <ul className={classes.list}>{filteredCategories}</ul>
           <Link to="/">
@@ -115,7 +115,7 @@ export class Header extends Component {
             </div>
           </div>
         </nav>
-      </div>
+      </header>
     );
   }
 }

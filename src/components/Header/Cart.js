@@ -40,12 +40,11 @@ export class Cart extends Component {
           )
         : 0;
 
-    const productQuantityHandler = (productId) => {
+    const productQuantityAdd = (productId) => {
       //get index of product in cart
       const productIndex = this.props.cart.findIndex(
         (item) => item.id === productId
       );
-
       //save price to state
       this.setState((prevState) => ({
         quantityAmount:
@@ -56,11 +55,28 @@ export class Cart extends Component {
       this.setState({
         items: [...this.state.items, "1"],
       });
-      console.log(currencyCheck[productIndex][0].amount);
+      console.log(this.state.items);
+    };
+
+    const productQuantityRemove = (productId) => {
+      const productIndex = this.props.cart.findIndex(
+        (item) => item.id === productId
+      );
+      if (this.state.items.length > 1) {
+        this.setState((prevState) => ({
+          quantityAmount:
+            prevState.quantityAmount - currencyCheck[productIndex][0].amount,
+        }));
+        this.setState({
+          items: this.state.items.splice(1),
+        });
+        console.log(currencyCheck[productIndex][0].amount);
+      }
     };
 
     return (
       <OverLay style={{ display: this.props.lat ? "block" : "none" }}>
+        {this.state.items}
         <div className={classes.cartContainer}>
           <div className={classes.itemInfo}>
             <p> My bag </p>
@@ -87,13 +103,13 @@ export class Cart extends Component {
                   </div>
 
                   <div className={classes.quantity}>
-                    <button
-                      onClick={productQuantityHandler.bind(null, item.id)}
-                    >
+                    <button onClick={productQuantityAdd.bind(null, item.id)}>
                       +
                     </button>
                     <p>{this.state.items.length}</p>
-                    <button>-</button>
+                    <button onClick={productQuantityRemove.bind(null, item.id)}>
+                      -
+                    </button>
                   </div>
                   <div className={classes.imagePreview}>
                     <img src={item.gallery[0]} alt={item.name} />

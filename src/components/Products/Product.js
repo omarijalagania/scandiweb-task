@@ -28,7 +28,7 @@ export class Product extends Component {
       );
       // need prevent to add duplicates
       this.props.cartAction(forCart);
-      alert("Product added to card");
+      alert("Product added to cart");
     };
 
     return (
