@@ -63,6 +63,23 @@
   margin-right: 7px;
   border: 1px solid var(--black);
   background-color: white;
+  margin-bottom: 3px;
+  padding: 2px;
+}
+
+.cartBtn:hover {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: var(--black);
+  color: white;
+}
+
+.cartActive {
+  outline: none;
+  border: none;
+  background-color: var(--black);
+  color: white;
 }
 
 .quantity button {

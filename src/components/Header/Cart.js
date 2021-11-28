@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import classes from "./Cart.module.css";
 import { currencySymbol } from "../ui/Symbol";
 import OverLay from "../ui/OverLay";
+import SizeButton from "../ui/SizeButton";
 
 export class Cart extends Component {
   state = {
@@ -40,6 +41,7 @@ export class Cart extends Component {
           )
         : 0;
 
+    //Product Add Func
     const productQuantityAdd = (productId) => {
       //get index of product in cart
       const productIndex = this.props.cart.findIndex(
@@ -53,11 +55,11 @@ export class Cart extends Component {
 
       //add quantity for item number
       this.setState({
-        items: [...this.state.items, "1"],
+        items: [...this.state.items, "count"],
       });
-      console.log(this.state.items);
     };
 
+    //Product Remove Func
     const productQuantityRemove = (productId) => {
       const productIndex = this.props.cart.findIndex(
         (item) => item.id === productId
@@ -67,16 +69,15 @@ export class Cart extends Component {
           quantityAmount:
             prevState.quantityAmount - currencyCheck[productIndex][0].amount,
         }));
+
         this.setState({
           items: this.state.items.splice(1),
         });
-        console.log(currencyCheck[productIndex][0].amount);
       }
     };
 
     return (
       <OverLay style={{ display: this.props.lat ? "block" : "none" }}>
-        {this.state.items}
         <div className={classes.cartContainer}>
           <div className={classes.itemInfo}>
             <p> My bag </p>
@@ -97,8 +98,19 @@ export class Cart extends Component {
                       {PriceResult[index]}
                     </p>
                     <div className={classes.sizes}>
-                      <button className={classes.cartBtn}>X</button>
-                      <button className={classes.cartBtn}>L</button>
+                      {item.attributes.length > 0 ? (
+                        item.attributes[0].items.map((size) => (
+                          <SizeButton
+                            className={classes.cartBtn}
+                            value={size.displayValue}
+                            key={size.displayValue}
+                          >
+                            {size.displayValue}
+                          </SizeButton>
+                        ))
+                      ) : (
+                        <p style={{ fontWeight: "700" }}>No Attributes</p>
+                      )}
                     </div>
                   </div>
 
