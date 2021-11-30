@@ -1,12 +1,9 @@
 const initialState = {
   id: "",
   data: [],
-  price: [
-    {
-      currency: "USD",
-    },
-  ],
+  price: ["USD"],
   cart: [],
+  singleProduct: {},
 };
 
 const ProductsReducer = (state = initialState, action) => {
@@ -21,6 +18,11 @@ const ProductsReducer = (state = initialState, action) => {
       return {
         ...state,
         data: action.payload,
+      };
+    case "SINGLE_PRODUCT":
+      return {
+        ...state,
+        singleProduct: [action.payload],
       };
     case "GET_PRICE":
       return {

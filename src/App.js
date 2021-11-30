@@ -14,7 +14,10 @@ class App extends Component {
       <Routes>
         <Route path="/" element={<App />}></Route>
         <Route index element={<Home />}></Route>
-        <Route path="/product/:id" element={<ProductDetail />}></Route>
+        <Route
+          path="/product/:id"
+          element={<ProductDetail {...this.props} />}
+        ></Route>
         <Route path="/cart/" element={<CartPage />}></Route>
         <Route path="/clothes/" element={<Category />}></Route>
         <Route path="/tech/" element={<Tech />}></Route>

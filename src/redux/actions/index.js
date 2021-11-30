@@ -5,6 +5,13 @@ export const getProductsAction = (value) => {
   };
 };
 
+export const SingleProductAction = (value) => {
+  return {
+    type: "SINGLE_PRODUCT",
+    payload: value,
+  };
+};
+
 export const getIdsAction = (value) => {
   return {
     type: "GET_ID",

@@ -30,7 +30,7 @@ export class Product extends Component {
       this.props.cartAction(forCart);
       alert("Product added to cart");
     };
-
+    console.log(this.props.price);
     return (
       <Link
         onClick={() => this.props.getIdsAction(this.props.product.id)}
@@ -81,7 +81,7 @@ export class Product extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    price: state.products.price[0].currency,
+    price: state.products.price[0],
     products: state.products.data,
     cart: state.products.cart,
   };

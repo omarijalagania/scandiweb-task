@@ -8,6 +8,9 @@ import { connect } from "react-redux";
 
 import { currencySymbol } from "../ui/Symbol";
 
+import { gql } from "@apollo/client";
+import { client } from "../../index";
+
 import Currency from "./Currency";
 import Cart from "./Cart";
 
@@ -15,19 +18,46 @@ import { ChevronUpOutline } from "react-ionicons";
 import { ChevronDownOutline } from "react-ionicons";
 
 export class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.ref = React.createRef();
+  }
+
   state = {
     currencyToggle: false,
     cartToggle: false,
     lat: false,
+    categories: [],
   };
 
-  toggleHandler = () => {
+  componentDidMount = async () => {
+    const response = await client.query({
+      query: gql`
+        query {
+          category {
+            name
+            products {
+              id
+              category
+            }
+          }
+        }
+      `,
+    });
+
+    this.setState({ categories: response.data.category.products });
+  };
+
+  toggleHandler = (event) => {
+    if (this.ref.current && !this.ref.current.contains(event.target)) {
+      this.setState({ currencyToggle: false });
+    }
     this.setState({ currencyToggle: !this.state.currencyToggle });
   };
 
   render() {
     //icon change for currency
-    let symbol = currencySymbol(this.props.price[0].currency);
+    let symbol = currencySymbol(this.props.price[0]);
 
     const cartToggleHandler = () => {
       this.setState({
@@ -39,7 +69,7 @@ export class Header extends Component {
     let categ = [];
 
     //extract categories from products
-    this.props.products.map((item) => categ.push(item.category));
+    this.state.categories.map((item) => categ.push(item.category));
     //Remove Duplicates
     let uniqueChars = [...new Set(categ)];
 
@@ -86,9 +116,7 @@ export class Header extends Component {
               ) : (
                 <ChevronUpOutline color={"#00000"} height="15px" width="12px" />
               )}
-              {this.state.currencyToggle && (
-                <Currency products={this.props.products} />
-              )}
+              {this.state.currencyToggle && <Currency />}
             </div>
             <div style={{ zIndex: "9999" }}>
               <CartOutline

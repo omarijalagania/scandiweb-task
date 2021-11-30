@@ -11,7 +11,7 @@ export class CartPage extends Component {
   render() {
     return (
       <>
-        <CategoryName>Cart</CategoryName>
+        {/* <CategoryName>Cart</CategoryName>
         <div className={classes.cartRow}>
           {this.props.cart.length !== 0 ? (
             this.props.cart.map((item) => (
@@ -20,7 +20,7 @@ export class CartPage extends Component {
           ) : (
             <h2>No Items</h2>
           )}
-        </div>
+        </div> */}
       </>
     );
   }
