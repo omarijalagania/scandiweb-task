@@ -39,3 +39,10 @@ export const removeCartAction = (value) => {
     payload: value,
   };
 };
+
+export const totalPriceAction = (value) => {
+  return {
+    type: "TOTAL_PRICE",
+    payload: value,
+  };
+};

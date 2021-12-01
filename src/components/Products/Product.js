@@ -45,10 +45,7 @@ export class Product extends Component {
             <div className={classes.outOfStock}>Out Of Stock</div>
           )}
           {this.props.product.inStock ? (
-            <span
-              style={{ zIndex: "999!important" }}
-              className={classes.smallCart}
-            >
+            <span className={classes.smallCart}>
               <img
                 className={classes.cartCircle}
                 id="circle"

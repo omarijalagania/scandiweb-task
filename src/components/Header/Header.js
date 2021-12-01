@@ -64,8 +64,10 @@ export class Header extends Component {
       if (this.state.cartToggle) {
         this.setState({
           cartToggle: false,
+          lat: false,
         });
       }
+
       if (this.state.currencyToggle) {
         this.setState({
           currencyToggle: false,
@@ -105,60 +107,70 @@ export class Header extends Component {
           ))
         : "No categories";
     return (
-      <header className={classes.mainContainer}>
-        <nav className={classes.nav}>
-          <ul className={classes.list}>{filteredCategories}</ul>
-          <Link to="/">
-            <img
-              className={classes.greenCart}
-              src="/images/cart.png"
-              height="30px"
-              width="30px"
-              alt="cart"
-            />
-          </Link>
-          <div className={classes.cartContainer}>
-            <p onClick={this.toggleHandler} style={{ padding: "5px" }}>
-              {symbol}
-            </p>
-            <div className={classes.currency} onClick={this.toggleHandler}>
-              {this.state.currencyToggle ? (
-                <ChevronDownOutline
+      <div>
+        {this.state.currencyToggle === true && (
+          <div className={classes.modal} onClick={test}></div>
+        )}
+
+        <header onClick={test} className={classes.mainContainer}>
+          <nav className={classes.nav}>
+            <ul className={classes.list}>{filteredCategories}</ul>
+            <Link to="/">
+              <img
+                className={classes.greenCart}
+                src="/images/cart.png"
+                height="30px"
+                width="30px"
+                alt="cart"
+              />
+            </Link>
+            <div className={classes.cartContainer}>
+              <p onClick={this.toggleHandler} style={{ padding: "5px" }}>
+                {symbol}
+              </p>
+              <div className={classes.currency} onClick={this.toggleHandler}>
+                {this.state.currencyToggle ? (
+                  <ChevronDownOutline
+                    color={"#00000"}
+                    height="15px"
+                    width="12px"
+                  />
+                ) : (
+                  <ChevronUpOutline
+                    color={"#00000"}
+                    height="15px"
+                    width="12px"
+                  />
+                )}
+                {this.state.currencyToggle && <Currency />}
+              </div>
+              <div>
+                <CartOutline
                   color={"#00000"}
-                  height="15px"
-                  width="12px"
+                  height="25px"
+                  width="21px"
+                  onClick={cartToggleHandler}
+                />
+              </div>
+              {this.state.cartToggle ? (
+                <Cart
+                  cartToggleHandler={cartToggleHandler}
+                  lat={this.state.lat}
                 />
               ) : (
-                <ChevronUpOutline color={"#00000"} height="15px" width="12px" />
+                ""
               )}
-              {this.state.currencyToggle && <Currency />}
-            </div>
-            <div style={{ zIndex: "9999" }}>
-              <CartOutline
-                color={"#00000"}
-                height="25px"
-                width="21px"
+              <div
                 onClick={cartToggleHandler}
-              />
+                style={{ opacity: this.state.cartToggle ? "1" : "0" }}
+                className={classes.statusContainer}
+              >
+                {this.props.cart.length >= 0 ? this.props.cart.length : "0"}
+              </div>
             </div>
-            {this.state.cartToggle ? (
-              <Cart
-                cartToggleHandler={cartToggleHandler}
-                lat={this.state.lat}
-              />
-            ) : (
-              ""
-            )}
-            <div
-              onClick={cartToggleHandler}
-              style={{ opacity: this.state.cartToggle ? "1" : "0" }}
-              className={classes.statusContainer}
-            >
-              {this.props.cart.length >= 0 ? this.props.cart.length : "0"}
-            </div>
-          </div>
-        </nav>
-      </header>
+          </nav>
+        </header>
+      </div>
     );
   }
 }

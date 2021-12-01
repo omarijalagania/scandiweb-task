@@ -43,7 +43,7 @@ export class Cart extends Component {
             <p>Total</p>
             <p>
               {symbol}
-              000
+              {this.props.totalPrice}
             </p>
           </div>
           <div className={classes.btns}>
@@ -68,6 +68,7 @@ const mapStateToProps = (state) => {
     cart: state.products.cart,
     price: state.products.price[0],
     products: state.products.data,
+    totalPrice: state.products.totalPrice,
   };
 };
 

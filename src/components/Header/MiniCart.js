@@ -8,6 +8,7 @@ import classes from "./Cart.module.css";
 
 import { connect } from "react-redux";
 import { removeCartAction } from "../../redux/actions";
+import { totalPriceAction } from "../../redux/actions";
 
 export class MiniCart extends Component {
   state = {
@@ -17,17 +18,23 @@ export class MiniCart extends Component {
     quantityAmount: 0,
   };
 
+  //check currency with Header currency
+  currencyCheck = this.props.cart.map((item) =>
+    item.prices.filter((item) => item.currency === this.props.price)
+  );
+
+  componentDidMount() {
+    this.setState({
+      quantityAmount: this.currencyCheck[this.props.index][0].amount,
+    });
+  }
+
   render() {
     //get changed symbol
     let symbol = currencySymbol(this.props.price);
 
-    //check currency with Header currency
-    const currencyCheck = this.props.cart.map((item) =>
-      item.prices.filter((item) => item.currency === this.props.price)
-    );
-
     //extract price arrays from array
-    const extractFromArr = currencyCheck.map(
+    const extractFromArr = this.currencyCheck.map(
       (item) => item[item.map((item, index) => index)]
     );
 
@@ -53,7 +60,6 @@ export class MiniCart extends Component {
         (item) => item.id !== productId
       );
       this.props.removeCartAction(removedItem);
-      console.log(removedItem);
     };
 
     // Product Add Func
@@ -65,10 +71,13 @@ export class MiniCart extends Component {
 
       this.setState((prevState) => ({
         quantityAmount:
-          prevState.quantityAmount + currencyCheck[productIndex][0].amount,
+          prevState.quantityAmount + this.currencyCheck[productIndex][0].amount,
         quantity: prevState.quantity + 1,
       }));
     };
+
+    //Total Price
+    this.props.totalPriceAction(total.toFixed(2));
 
     //Product Remove Func
     const productQuantityRemove = (productId, index) => {
@@ -79,11 +88,13 @@ export class MiniCart extends Component {
       if (this.state.quantity > 1) {
         this.setState((prevState) => ({
           quantityAmount:
-            prevState.quantityAmount - currencyCheck[productIndex][0].amount,
+            prevState.quantityAmount -
+            this.currencyCheck[productIndex][0].amount,
           quantity: prevState.quantity - 1,
         }));
       }
     };
+
     return (
       <>
         <button
@@ -98,7 +109,7 @@ export class MiniCart extends Component {
 
             <p>
               {symbol}
-              {(total + this.state.quantityAmount).toFixed(2)}
+              {this.state.quantityAmount.toFixed(2)}
             </p>
             <div className={classes.sizes}>
               {this.props.item.attributes.length > 0 ? (
@@ -110,7 +121,6 @@ export class MiniCart extends Component {
                         ? classes.cartActive
                         : classes.sizeBtnEmpty
                     }
-                    //className={classes.cartBtn}
                     key={size.displayValue}
                   >
                     {size.displayValue}
@@ -164,6 +174,7 @@ export class MiniCart extends Component {
 const mapDispatchToProps = () => {
   return {
     removeCartAction,
+    totalPriceAction,
   };
 };
 
