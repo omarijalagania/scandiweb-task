@@ -79,7 +79,7 @@ class ProductDetail extends Component {
           <div key={item.id} className={classes.container}>
             <div className={classes.imageContainer}>
               <div className={classes.smallImages}>
-                {item.gallery.slice(0, 3).map((image) => (
+                {item.gallery.map((image) => (
                   <img key={image} src={image} alt={item.name} />
                 ))}
               </div>
