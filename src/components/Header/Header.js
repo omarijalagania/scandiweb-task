@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { CartOutline } from "react-ionicons";
 import classes from "./Header.module.css";
-
+import classes2 from "../ui/OverLay.module.css";
 import { NavLink as Link } from "react-router-dom";
 
 import { connect } from "react-redux";

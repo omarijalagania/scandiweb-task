@@ -11,18 +11,16 @@ export class CartPage extends Component {
   render() {
     return (
       <>
-        {/* <CategoryName>Cart</CategoryName>
+        <CategoryName>Cart</CategoryName>
         <div className={classes.cartRow}>
           {this.props.cart.length !== 0 ? (
-            this.props.cart.map(
-              (item) =>
-                <CartItem key={item.id} item={item} />
-                
-            )
+            this.props.cart.map((item) => (
+              <CartItem key={item.id} item={item} />
+            ))
           ) : (
             <h2>No Items</h2>
           )}
-        </div> */}
+        </div>
         {console.log(this.props.cart)}
       </>
     );

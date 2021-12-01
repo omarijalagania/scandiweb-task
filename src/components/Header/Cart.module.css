@@ -3,12 +3,13 @@
   background-color: white;
   padding: 4px;
   top: 0;
-  right: 37px;
+  left: 65%;
+  right: 0px;
   width: 270px;
   -webkit-box-shadow: -1px 3px 15px -2px #000000;
   box-shadow: -1px 3px 15px -2px #e4e4e4;
   transition: 0.3s ease;
-  z-index: 9;
+  z-index: 9999;
 }
 
 .itemContainer {
