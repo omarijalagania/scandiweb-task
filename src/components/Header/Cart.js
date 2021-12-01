@@ -92,7 +92,7 @@ export class Cart extends Component {
                 <div key={item.id} className={classes.itemContainer}>
                   <div className={classes.itemDescription}>
                     <p>{item.name}</p>
-                    <p>{item.description.replace(/(<([^>]+)>)/gi, "")}</p>
+
                     <p>
                       {symbol}
                       {PriceResult[index]}

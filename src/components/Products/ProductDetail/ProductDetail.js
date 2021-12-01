@@ -8,7 +8,6 @@ import { client } from "../../../index";
 
 import SizeButton from "../../ui/SizeButton";
 import { currencySymbol } from "../../ui/Symbol";
-import { SingleProductAction } from "../../../redux/actions";
 import { cartAction } from "../../../redux/actions";
 
 class ProductDetail extends Component {
@@ -52,21 +51,11 @@ class ProductDetail extends Component {
     });
 
     this.setState({ singlePost: [response.data.product] });
-    this.props.SingleProductAction(response.data.product);
     //Filter Currency with chousen currency
   }
 
   render() {
     //change amount by currenc
-    const zen = () => {
-      this.setState({
-        filteredCurrency: this.state.singlePost[0].prices.filter(
-          (item) => item.currency === this.props.price
-        ),
-      });
-    };
-
-    console.log(this.state.filteredCurrency);
     // let zub = val[0].map((item) => item);
     //console.log(val);
     // this.setState({
@@ -78,6 +67,7 @@ class ProductDetail extends Component {
     //  alert("Product Added To Card");
     // };
     //Switch currency icon
+
     let symbol = currencySymbol(this.props.price);
 
     return this.state.singlePost != "" ? (
@@ -119,11 +109,21 @@ class ProductDetail extends Component {
                 </div>
               </div>
               <p className={classes.price}>Price</p>
-              <p className={classes.priceAmount}>{symbol}</p>
-              <button className={classes.cartBtn}>Cart</button>
-              <p className={classes.description}>
-                {item.description.replace(/(<([^>]+)>)/gi, "")}
+              <p className={classes.priceAmount}>
+                {symbol}
+                {item.prices.map((cur) => {
+                  if (cur.currency === this.props.price) {
+                    return <> {cur.amount} </>;
+                  }
+                })}
               </p>
+              <button className={classes.cartBtn}>Cart</button>
+              <p
+                className={classes.description}
+                dangerouslySetInnerHTML={{
+                  __html: item.description,
+                }}
+              ></p>
             </div>
           </div>
         );
@@ -145,7 +145,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = () => {
   return {
     cartAction,
-    SingleProductAction,
   };
 };
 
