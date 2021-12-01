@@ -57,7 +57,12 @@ class ProductDetail extends Component {
   render() {
     // //add product to cart item
     const addToCartHandler = () => {
-      if (this.state.activeBtn !== "") {
+      //check if attributes exists
+      const atributes = this.state.singlePost.map(
+        (item) => item.attributes.length === 0
+      );
+
+      if (this.state.activeBtn !== "" || atributes[0]) {
         this.props.cartAction(this.state.singlePost);
         alert("Product Added To Card");
       } else {
@@ -131,7 +136,13 @@ class ProductDetail extends Component {
                   }
                 })}
               </p>
-              <button onClick={addToCartHandler} className={classes.cartBtn}>
+
+              <button
+                onClick={item.inStock ? addToCartHandler : null}
+                className={
+                  item.inStock ? classes.cartBtn : classes.cartBtnDisabled
+                }
+              >
                 Cart
               </button>
             </div>

@@ -113,6 +113,17 @@
   cursor: pointer;
 }
 
+.cartBtnDisabled {
+  width: 292px;
+  height: 50px;
+  background-color: gray;
+  color: white;
+  text-transform: uppercase;
+  outline: none;
+  border: none;
+  cursor: not-allowed;
+}
+
 .description {
   margin-top: 20px;
   max-width: 292px;

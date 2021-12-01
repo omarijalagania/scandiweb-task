@@ -42,7 +42,7 @@ export class Cart extends Component {
 
     //final result
     const PriceResult = extractFromArr.map((item) => item.amount);
-    console.log(PriceResult);
+
     //total summ
     const total =
       PriceResult.length !== 0
@@ -52,18 +52,19 @@ export class Cart extends Component {
         : 0;
 
     // Product Add Func
-    const productQuantityAdd = (productId, index) => {
+    const productQuantityAdd = (productId) => {
       //get index of product in cart
       const productIndex = this.props.cart.findIndex(
         (item) => item.id === productId
       );
+      console.log(productIndex);
       // save price to state
-      if (productIndex === index) {
-        this.setState((prevState) => ({
-          quantityAmount:
-            prevState.quantityAmount + currencyCheck[productIndex][0].amount,
-        }));
-      }
+
+      this.setState((prevState) => ({
+        quantityAmount:
+          prevState.quantityAmount + currencyCheck[productIndex][0].amount,
+        quantity: prevState.quantity + 1,
+      }));
 
       //add quantity for item number
       this.setState({
@@ -72,14 +73,16 @@ export class Cart extends Component {
     };
 
     //Product Remove Func
-    const productQuantityRemove = (productId) => {
+    const productQuantityRemove = (productId, index) => {
       const productIndex = this.props.cart.findIndex(
         (item) => item.id === productId
       );
-      if (this.state.items.length > 1) {
+
+      if (this.state.quantity > 1) {
         this.setState((prevState) => ({
           quantityAmount:
             prevState.quantityAmount - currencyCheck[productIndex][0].amount,
+          quantity: prevState.quantity - 1,
         }));
 
         this.setState({
@@ -102,7 +105,10 @@ export class Cart extends Component {
             this.props.cart.map((item, index) => {
               return (
                 <>
-                  <button onClick={this.itemRemoveHandler.bind(null, item.id)}>
+                  <button
+                    className={classes.removeBtn}
+                    onClick={this.itemRemoveHandler.bind(null, item.id)}
+                  >
                     remove
                   </button>
                   <div key={item.id} className={classes.itemContainer}>
@@ -118,7 +124,6 @@ export class Cart extends Component {
                           item.attributes[0].items.map((size) => (
                             <SizeButton
                               className={classes.cartBtn}
-                              value={size.displayValue}
                               key={size.displayValue}
                             >
                               {size.displayValue}
@@ -136,7 +141,16 @@ export class Cart extends Component {
                       >
                         +
                       </button>
-                      <p>{this.state.items.length}</p>
+                      <input
+                        type="text"
+                        name="quantity"
+                        value={this.state.quantity}
+                        maxlength="2"
+                        max="10"
+                        size="1"
+                        id="number"
+                      />
+
                       <button
                         onClick={productQuantityRemove.bind(null, item.id)}
                       >

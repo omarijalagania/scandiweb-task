@@ -60,12 +60,13 @@
 .cartBtn {
   width: 28px;
   height: 28px;
+  text-align: center;
   outline: none;
   margin-right: 7px;
   border: 1px solid var(--black);
   background-color: white;
   margin-bottom: 3px;
-  padding: 4px;
+  padding: 5px;
 }
 
 .cartBtn:hover {
@@ -122,6 +123,22 @@
   background: #ffffff;
   border: 1px solid #1d1f22;
   cursor: pointer;
+}
+
+.removeBtn {
+  padding: 5px;
+  background-color: var(--primary-green);
+  outline: none;
+  border: 1px solid var(--primary-green);
+  color: white;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.removeBtn:hover {
+  background-color: white;
+  color: var(--primary-green);
+  border: 1px solid var(--primary-green);
 }
 
 .viewBtn:hover {
