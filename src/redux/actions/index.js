@@ -32,3 +32,10 @@ export const cartAction = (value) => {
     payload: value,
   };
 };
+
+export const removeCartAction = (value) => {
+  return {
+    type: "REMOVE_FROM_CART",
+    payload: value,
+  };
+};

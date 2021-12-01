@@ -65,7 +65,7 @@
   border: 1px solid var(--black);
   background-color: white;
   margin-bottom: 3px;
-  padding: 2px;
+  padding: 4px;
 }
 
 .cartBtn:hover {

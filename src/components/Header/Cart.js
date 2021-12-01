@@ -9,12 +9,21 @@ import { currencySymbol } from "../ui/Symbol";
 import OverLay from "../ui/OverLay";
 import SizeButton from "../ui/SizeButton";
 
+import { removeCartAction } from "../../redux/actions";
+
 export class Cart extends Component {
   state = {
     totalPrice: 0,
     quantity: 1,
     items: [0],
     quantityAmount: 0,
+  };
+
+  //remove item from cart
+  itemRemoveHandler = (productId) => {
+    const removedItem = this.props.cart.filter((item) => item.id !== productId);
+    this.props.removeCartAction(removedItem);
+    console.log(removedItem);
   };
 
   render() {
@@ -92,46 +101,53 @@ export class Cart extends Component {
           {this.props.cart.length > 0 ? (
             this.props.cart.map((item, index) => {
               return (
-                <div key={item.id} className={classes.itemContainer}>
-                  <div className={classes.itemDescription}>
-                    <p>{item.name}</p>
+                <>
+                  <button onClick={this.itemRemoveHandler.bind(null, item.id)}>
+                    remove
+                  </button>
+                  <div key={item.id} className={classes.itemContainer}>
+                    <div className={classes.itemDescription}>
+                      <p>{item.name}</p>
 
-                    <p>
-                      {symbol}
-                      {PriceResult[index]}
-                    </p>
-                    <div className={classes.sizes}>
-                      {item.attributes.length > 0 ? (
-                        item.attributes[0].items.map((size) => (
-                          <SizeButton
-                            className={classes.cartBtn}
-                            value={size.displayValue}
-                            key={size.displayValue}
-                          >
-                            {size.displayValue}
-                          </SizeButton>
-                        ))
-                      ) : (
-                        <p style={{ fontWeight: "700" }}>No Attributes</p>
-                      )}
+                      <p>
+                        {symbol}
+                        {PriceResult[index]}
+                      </p>
+                      <div className={classes.sizes}>
+                        {item.attributes.length > 0 ? (
+                          item.attributes[0].items.map((size) => (
+                            <SizeButton
+                              className={classes.cartBtn}
+                              value={size.displayValue}
+                              key={size.displayValue}
+                            >
+                              {size.displayValue}
+                            </SizeButton>
+                          ))
+                        ) : (
+                          <p style={{ fontWeight: "700" }}>No Attributes</p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className={classes.quantity}>
+                      <button
+                        onClick={productQuantityAdd.bind(null, item.id, index)}
+                      >
+                        +
+                      </button>
+                      <p>{this.state.items.length}</p>
+                      <button
+                        onClick={productQuantityRemove.bind(null, item.id)}
+                      >
+                        -
+                      </button>
+                    </div>
+                    <div className={classes.imagePreview}>
+                      <img src={item.gallery[0]} alt={item.name} />
                     </div>
                   </div>
-
-                  <div className={classes.quantity}>
-                    <button
-                      onClick={productQuantityAdd.bind(null, item.id, index)}
-                    >
-                      +
-                    </button>
-                    <p>{this.state.items.length}</p>
-                    <button onClick={productQuantityRemove.bind(null, item.id)}>
-                      -
-                    </button>
-                  </div>
-                  <div className={classes.imagePreview}>
-                    <img src={item.gallery[0]} alt={item.name} />
-                  </div>
-                </div>
+                </>
               );
             })
           ) : (
@@ -169,4 +185,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Cart);
+const mapDispatchToProps = () => {
+  return {
+    removeCartAction,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps())(Cart);

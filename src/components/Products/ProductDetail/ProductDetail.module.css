@@ -16,7 +16,8 @@
 
 .smallImages img {
   width: 120px;
-  height: 120px;
+  object-fit: cover;
+  height: auto;
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -36,6 +37,7 @@
   width: 430px;
   height: 430px;
   object-fit: cover;
+  padding: 20px;
 }
 .productDetailsConteiner {
   width: 292px;

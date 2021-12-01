@@ -146,7 +146,6 @@ class ProductDetail extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    singleProduct: state.products.singleProduct,
     id: state.products.id,
     price: state.products.price[0],
   };

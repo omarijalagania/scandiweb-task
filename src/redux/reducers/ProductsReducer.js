@@ -4,6 +4,7 @@ const initialState = {
   price: ["USD"],
   cart: [],
   singleProduct: {},
+  newCart: [],
 };
 
 const ProductsReducer = (state = initialState, action) => {
@@ -19,6 +20,7 @@ const ProductsReducer = (state = initialState, action) => {
         ...state,
         data: action.payload,
       };
+
     case "SINGLE_PRODUCT":
       return {
         ...state,
@@ -34,6 +36,13 @@ const ProductsReducer = (state = initialState, action) => {
         ...state,
         cart: state.cart.concat(action.payload),
       };
+
+    case "REMOVE_FROM_CART":
+      return {
+        ...state,
+        cart: state.newCart.concat(action.payload),
+      };
+
     default:
       return state;
   }
