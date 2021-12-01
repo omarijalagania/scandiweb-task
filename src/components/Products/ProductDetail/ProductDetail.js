@@ -73,7 +73,6 @@ class ProductDetail extends Component {
     //active size btn
     const btnActiveHandler = (index) => {
       this.setState({ activeBtn: index });
-      console.log(index);
     };
 
     let symbol = currencySymbol(this.props.price);

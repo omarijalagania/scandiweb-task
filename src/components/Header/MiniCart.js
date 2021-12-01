@@ -1,20 +1,22 @@
 import React, { Component } from "react";
 
+import SizeButton from "../ui/SizeButton";
+
 import { currencySymbol } from "../ui/Symbol";
+
+import classes from "./Cart.module.css";
 
 import { connect } from "react-redux";
 import { removeCartAction } from "../../redux/actions";
 
-import classes from "./CartPage.module.css";
-import SizeButton from "../ui/SizeButton";
-
-export class CartItem extends Component {
+export class MiniCart extends Component {
   state = {
     totalPrice: 0,
     quantity: 1,
     activeBtn: "",
     quantityAmount: 0,
   };
+
   render() {
     //get changed symbol
     let symbol = currencySymbol(this.props.price);
@@ -82,82 +84,79 @@ export class CartItem extends Component {
         }));
       }
     };
-    console.log(priceResult);
-
     return (
-      <div className={classes.cartContainer}>
+      <>
         <button
           className={classes.removeBtn}
           onClick={itemRemoveHandler.bind(null, this.props.item.id)}
         >
-          Remove
+          remove
         </button>
-        <div className={classes.productContainer}>
-          <div className={classes.productDetails}>
-            <h2>{this.props.item.name}</h2>
-            <p
-              dangerouslySetInnerHTML={{
-                __html: this.props.item.description,
-              }}
-            ></p>
+        <div key={this.props.item.id} className={classes.itemContainer}>
+          <div className={classes.itemDescription}>
+            <p>{this.props.item.name}</p>
+
             <p>
               {symbol}
-              {(+priceResult[0] + this.state.quantityAmount).toFixed(2)}
+              {(total + this.state.quantityAmount).toFixed(2)}
             </p>
-
-            <div className={classes.productSizes}>
-              {this.props.item.attributes[0].items.map((size, index) => (
-                <SizeButton
-                  onClick={btnActiveHandler.bind(null, index)}
-                  className={
-                    this.state.activeBtn === index
-                      ? classes.cartActive
-                      : classes.sizeBtnEmpty
-                  }
-                >
-                  {size.displayValue}
-                </SizeButton>
-              ))}
+            <div className={classes.sizes}>
+              {this.props.item.attributes.length > 0 ? (
+                this.props.item.attributes[0].items.map((size, index) => (
+                  <SizeButton
+                    onClick={btnActiveHandler.bind(null, index)}
+                    className={
+                      this.state.activeBtn === index
+                        ? classes.cartActive
+                        : classes.sizeBtnEmpty
+                    }
+                    //className={classes.cartBtn}
+                    key={size.displayValue}
+                  >
+                    {size.displayValue}
+                  </SizeButton>
+                ))
+              ) : (
+                <p style={{ fontWeight: "700" }}>No Attributes</p>
+              )}
             </div>
           </div>
 
-          <div className={classes.rightContainer}>
-            <div className={classes.rightButtons}>
-              <button
-                onClick={productQuantityAdd.bind(
-                  null,
-                  this.props.item.id,
-                  this.props.index
-                )}
-              >
-                +
-              </button>
-              <input
-                type="text"
-                name="quantity"
-                value={this.state.quantity}
-                maxlength="2"
-                max="10"
-                size="1"
-                id="number"
-              />
+          <div className={classes.quantity}>
+            <button
+              onClick={productQuantityAdd.bind(
+                null,
+                this.props.item.id,
+                this.props.index
+              )}
+            >
+              +
+            </button>
+            <input
+              type="text"
+              name="quantity"
+              value={this.state.quantity}
+              maxlength="2"
+              max="10"
+              size="1"
+              id="number"
+            />
 
-              <button
-                onClick={productQuantityRemove.bind(
-                  null,
-                  this.props.item.id,
-                  this.props.index
-                )}
-              >
-                -
-              </button>
-            </div>
-            <div className={classes.rightImage}>
-              <img src={this.props.item.gallery[0]} alt="sweater" />
-            </div>
+            <button
+              onClick={productQuantityRemove.bind(
+                null,
+                this.props.item.id,
+                this.props.index
+              )}
+            >
+              -
+            </button>
+          </div>
+          <div className={classes.imagePreview}>
+            <img src={this.props.item.gallery[0]} alt={this.props.item.name} />
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }
@@ -175,4 +174,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps())(CartItem);
+export default connect(mapStateToProps, mapDispatchToProps())(MiniCart);

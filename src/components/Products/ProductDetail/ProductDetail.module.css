@@ -3,6 +3,7 @@
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
+  z-index: 9;
 }
 
 .imageContainer {
@@ -70,9 +71,10 @@
   height: 43px;
   cursor: pointer;
   outline: none;
-  border: none;
+  border: 1px solid var(--black);
   background-color: var(--black);
   color: white;
+  margin: 0 10px;
 }
 
 .sizeBtnEmpty {

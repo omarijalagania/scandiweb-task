@@ -57,7 +57,7 @@
   padding: 5px;
 }
 
-.cartBtn {
+.sizeBtnEmpty {
   width: 28px;
   height: 28px;
   text-align: center;
@@ -69,19 +69,26 @@
   padding: 5px;
 }
 
-.cartBtn:hover {
+.sizeBtnEmpty:hover {
   cursor: pointer;
   outline: none;
-  border: none;
+  border: 1px solid var(--black);
   background-color: var(--black);
   color: white;
 }
 
 .cartActive {
+  width: 28px;
+  height: 28px;
+  text-align: center;
   outline: none;
-  border: none;
+  margin-right: 7px;
+  border: 1px solid var(--black);
+  outline: none;
   background-color: var(--black);
   color: white;
+  margin-bottom: 3px;
+  padding: 5px;
 }
 
 .quantity button {

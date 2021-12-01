@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import classes from "./Cart.module.css";
 import { currencySymbol } from "../ui/Symbol";
 import OverLay from "../ui/OverLay";
-import SizeButton from "../ui/SizeButton";
+import MiniCart from "./MiniCart";
 
 import { removeCartAction } from "../../redux/actions";
 
@@ -15,81 +15,12 @@ export class Cart extends Component {
   state = {
     totalPrice: 0,
     quantity: 1,
-    items: [0],
+    activeBtn: "",
     quantityAmount: 0,
-  };
-
-  //remove item from cart
-  itemRemoveHandler = (productId) => {
-    const removedItem = this.props.cart.filter((item) => item.id !== productId);
-    this.props.removeCartAction(removedItem);
-    console.log(removedItem);
   };
 
   render() {
     let symbol = currencySymbol(this.props.price);
-
-    //check currency with Header currency
-    const currencyCheck = this.props.cart.map((item) =>
-      item.prices.filter((item) => item.currency === this.props.price)
-    );
-
-    // console.log(currencyCheck[0]);
-    //extract price arrays from array
-    const extractFromArr = currencyCheck.map(
-      (item) => item[item.map((item, index) => index)]
-    );
-
-    //final result
-    const PriceResult = extractFromArr.map((item) => item.amount);
-
-    //total summ
-    const total =
-      PriceResult.length !== 0
-        ? PriceResult.reduce(
-            (a, b) => 1 * a + 1 * b //products sum
-          )
-        : 0;
-
-    // Product Add Func
-    const productQuantityAdd = (productId) => {
-      //get index of product in cart
-      const productIndex = this.props.cart.findIndex(
-        (item) => item.id === productId
-      );
-      console.log(productIndex);
-      // save price to state
-
-      this.setState((prevState) => ({
-        quantityAmount:
-          prevState.quantityAmount + currencyCheck[productIndex][0].amount,
-        quantity: prevState.quantity + 1,
-      }));
-
-      //add quantity for item number
-      this.setState({
-        items: [...this.state.items, "count"],
-      });
-    };
-
-    //Product Remove Func
-    const productQuantityRemove = (productId, index) => {
-      const productIndex = this.props.cart.findIndex(
-        (item) => item.id === productId
-      );
-
-      if (this.state.quantity > 1) {
-        this.setState((prevState) => ({
-          quantityAmount:
-            prevState.quantityAmount - currencyCheck[productIndex][0].amount,
-          quantity: prevState.quantity - 1,
-        }));
-
-        this.setState({
-          items: this.state.items.splice(1),
-        });
-      }
-    };
 
     return (
       <OverLay style={{ display: this.props.lat ? "block" : "none" }}>
@@ -103,66 +34,7 @@ export class Cart extends Component {
 
           {this.props.cart.length > 0 ? (
             this.props.cart.map((item, index) => {
-              return (
-                <>
-                  <button
-                    className={classes.removeBtn}
-                    onClick={this.itemRemoveHandler.bind(null, item.id)}
-                  >
-                    remove
-                  </button>
-                  <div key={item.id} className={classes.itemContainer}>
-                    <div className={classes.itemDescription}>
-                      <p>{item.name}</p>
-
-                      <p>
-                        {symbol}
-                        {PriceResult[index]}
-                      </p>
-                      <div className={classes.sizes}>
-                        {item.attributes.length > 0 ? (
-                          item.attributes[0].items.map((size) => (
-                            <SizeButton
-                              className={classes.cartBtn}
-                              key={size.displayValue}
-                            >
-                              {size.displayValue}
-                            </SizeButton>
-                          ))
-                        ) : (
-                          <p style={{ fontWeight: "700" }}>No Attributes</p>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className={classes.quantity}>
-                      <button
-                        onClick={productQuantityAdd.bind(null, item.id, index)}
-                      >
-                        +
-                      </button>
-                      <input
-                        type="text"
-                        name="quantity"
-                        value={this.state.quantity}
-                        maxlength="2"
-                        max="10"
-                        size="1"
-                        id="number"
-                      />
-
-                      <button
-                        onClick={productQuantityRemove.bind(null, item.id)}
-                      >
-                        -
-                      </button>
-                    </div>
-                    <div className={classes.imagePreview}>
-                      <img src={item.gallery[0]} alt={item.name} />
-                    </div>
-                  </div>
-                </>
-              );
+              return <MiniCart item={item} index={index} />;
             })
           ) : (
             <p style={{ padding: "15px" }}>No items</p>
@@ -171,7 +43,7 @@ export class Cart extends Component {
             <p>Total</p>
             <p>
               {symbol}
-              {(total + this.state.quantityAmount).toFixed(2)}
+              000
             </p>
           </div>
           <div className={classes.btns}>

@@ -37,16 +37,6 @@
   margin: 15px 0;
 }
 
-.forBtn {
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-  outline: none;
-  border: 1px solid var(--black);
-  margin-right: 10px;
-  background-color: white;
-}
-
 .forBtn:hover {
   cursor: pointer;
   outline: none;
@@ -70,6 +60,56 @@
   border: 1px solid var(--black);
   background-color: white;
   cursor: pointer;
+}
+
+.sizeBtnEmpty {
+  width: 82px;
+  height: 28px;
+  text-align: center;
+  outline: none;
+  margin-right: 7px;
+  border: 1px solid var(--black);
+  background-color: white;
+  margin-bottom: 3px;
+  padding: 5px;
+}
+
+.sizeBtnEmpty:hover {
+  cursor: pointer;
+  outline: none;
+  border: 1px solid var(--black);
+  background-color: var(--black);
+  color: white;
+}
+
+.cartActive {
+  width: 82px;
+  height: 28px;
+  text-align: center;
+  outline: none;
+  margin-right: 7px;
+  border: 1px solid var(--black);
+  outline: none;
+  background-color: var(--black);
+  color: white;
+  margin-bottom: 3px;
+  padding: 5px;
+}
+
+.removeBtn {
+  padding: 5px;
+  background-color: var(--primary-green);
+  outline: none;
+  border: 1px solid var(--primary-green);
+  color: white;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.removeBtn:hover {
+  background-color: white;
+  color: var(--primary-green);
+  border: 1px solid var(--primary-green);
 }
 
 @media (max-width: 1224px) {

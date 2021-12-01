@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 
 import CategoryName from "../ui/CategoryName";
 import CartItem from "./CartItem";
+import { removeCartAction } from "../../redux/actions";
 
 export class CartPage extends Component {
   render() {
@@ -14,14 +15,13 @@ export class CartPage extends Component {
         <CategoryName>Cart</CategoryName>
         <div className={classes.cartRow}>
           {this.props.cart.length !== 0 ? (
-            this.props.cart.map((item) => (
-              <CartItem key={item.id} item={item} />
+            this.props.cart.map((item, index) => (
+              <CartItem key={item.id} item={item} index={index} />
             ))
           ) : (
             <h2>No Items</h2>
           )}
         </div>
-        {console.log(this.props.cart)}
       </>
     );
   }
