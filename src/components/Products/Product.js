@@ -34,15 +34,9 @@ export class Product extends Component {
     return (
       <Link
         onClick={() => this.props.getIdsAction(this.props.product.id)}
-        to={
-          this.props.product.inStock ? `/product/${this.props.product.id}` : ""
-        }
+        to={`/product/${this.props.product.id}`}
       >
-        <div
-          className={`${classes.div1} ${
-            this.props.product.inStock ? null : classes.disabled
-          }`}
-        >
+        <div className={classes.div1}>
           <img
             src={this.props.product.gallery[0]}
             alt={this.props.product.name}

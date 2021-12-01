@@ -134,12 +134,6 @@ class ProductDetail extends Component {
               <button onClick={addToCartHandler} className={classes.cartBtn}>
                 Cart
               </button>
-              <p
-                className={classes.description}
-                dangerouslySetInnerHTML={{
-                  __html: item.description,
-                }}
-              ></p>
             </div>
           </div>
         );

@@ -43,16 +43,18 @@ export class Cart extends Component {
         : 0;
 
     // Product Add Func
-    const productQuantityAdd = (productId) => {
+    const productQuantityAdd = (productId, index) => {
       //get index of product in cart
       const productIndex = this.props.cart.findIndex(
         (item) => item.id === productId
       );
       // save price to state
-      this.setState((prevState) => ({
-        quantityAmount:
-          prevState.quantityAmount + currencyCheck[productIndex][0].amount,
-      }));
+      if (productIndex === index) {
+        this.setState((prevState) => ({
+          quantityAmount:
+            prevState.quantityAmount + currencyCheck[productIndex][0].amount,
+        }));
+      }
 
       //add quantity for item number
       this.setState({
@@ -116,7 +118,9 @@ export class Cart extends Component {
                   </div>
 
                   <div className={classes.quantity}>
-                    <button onClick={productQuantityAdd.bind(null, item.id)}>
+                    <button
+                      onClick={productQuantityAdd.bind(null, item.id, index)}
+                    >
                       +
                     </button>
                     <p>{this.state.items.length}</p>
