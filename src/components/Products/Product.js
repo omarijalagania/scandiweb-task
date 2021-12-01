@@ -55,15 +55,12 @@ export class Product extends Component {
               style={{ zIndex: "999!important" }}
               className={classes.smallCart}
             >
-              <Link to="">
-                <img
-                  onClick={addToCartHandler.bind(null, this.props.product.id)}
-                  className={classes.cartCircle}
-                  id="circle"
-                  src="/images/circle.png"
-                  alt="cart"
-                />
-              </Link>
+              <img
+                className={classes.cartCircle}
+                id="circle"
+                src="/images/circle.png"
+                alt="cart"
+              />
             </span>
           ) : (
             ""

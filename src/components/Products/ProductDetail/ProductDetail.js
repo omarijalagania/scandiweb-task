@@ -12,7 +12,7 @@ import { cartAction } from "../../../redux/actions";
 
 class ProductDetail extends Component {
   state = {
-    activeBtn: false,
+    activeBtn: "",
     path: window.location.pathname.replace("/product/", ""),
     singlePost: [],
     filteredCurrency: [],
@@ -55,18 +55,21 @@ class ProductDetail extends Component {
   }
 
   render() {
-    //change amount by currenc
-    // let zub = val[0].map((item) => item);
-    //console.log(val);
-    // this.setState({
-    //   amount: this.state.filteredCurrency.map((item) => item.amount),
-    // });
     // //add product to cart item
-    // const addToCartHandler = () => {
-    //this.props.cartAction(filteredData);
-    //  alert("Product Added To Card");
-    // };
-    //Switch currency icon
+    const addToCartHandler = () => {
+      if (this.state.activeBtn !== "") {
+        this.props.cartAction(this.state.singlePost);
+        alert("Product Added To Card");
+      } else {
+        alert("Choose size");
+      }
+    };
+
+    //active size btn
+    const btnActiveHandler = (index) => {
+      this.setState({ activeBtn: index });
+      console.log(index);
+    };
 
     let symbol = currencySymbol(this.props.price);
 
@@ -89,14 +92,25 @@ class ProductDetail extends Component {
             </div>
             <div className={classes.productDetailsConteiner}>
               <h2>{item.name}</h2>
-              <h3>Running shorts</h3>
-              <p>{item.description.replace(/(<([^>]+)>)/gi, "")}</p>
+              <h3>{item.brand}</h3>
+              <p
+                className={classes.description}
+                dangerouslySetInnerHTML={{
+                  __html: item.description,
+                }}
+              ></p>
               <div className={classes.sizes}>
                 <p>size</p>
                 <div className={classes.btnGroup}>
                   {item.attributes.length > 0 ? (
-                    item.attributes[0].items.map((size) => (
+                    item.attributes[0].items.map((size, index) => (
                       <SizeButton
+                        onClick={btnActiveHandler.bind(null, index)}
+                        className={
+                          this.state.activeBtn === index
+                            ? classes.sizeBtnActive
+                            : classes.sizeBtnEmpty
+                        }
                         value={size.displayValue}
                         key={size.displayValue}
                       >
@@ -117,7 +131,9 @@ class ProductDetail extends Component {
                   }
                 })}
               </p>
-              <button className={classes.cartBtn}>Cart</button>
+              <button onClick={addToCartHandler} className={classes.cartBtn}>
+                Cart
+              </button>
               <p
                 className={classes.description}
                 dangerouslySetInnerHTML={{

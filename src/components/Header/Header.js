@@ -49,10 +49,11 @@ export class Header extends Component {
   };
 
   toggleHandler = (event) => {
-    if (this.ref.current && !this.ref.current.contains(event.target)) {
-      this.setState({ currencyToggle: false });
-    }
-    this.setState({ currencyToggle: !this.state.currencyToggle });
+    this.setState({
+      currencyToggle: !this.state.currencyToggle,
+      cartToggle: false,
+      lat: false,
+    });
   };
 
   render() {
@@ -63,6 +64,7 @@ export class Header extends Component {
       this.setState({
         cartToggle: !this.state.cartToggle,
         lat: !this.state.lat,
+        currencyToggle: false,
       });
     };
     //array for categories

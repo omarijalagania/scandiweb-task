@@ -73,6 +73,16 @@
   color: white;
 }
 
+.sizeBtnEmpty {
+  width: 57px;
+  height: 43px;
+  cursor: pointer;
+  background-color: white;
+  outline: none;
+  border: 1px solid var(--black);
+  margin: 0 10px;
+}
+
 .btnGroup {
   display: flex;
   justify-content: space-evenly;

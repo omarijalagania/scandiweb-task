@@ -20,19 +20,20 @@ export class Cart extends Component {
   render() {
     let symbol = currencySymbol(this.props.price);
 
-    const amount = this.props.cart.map((item) => item);
-
     //check currency with Header currency
-    const currencyCheck = amount.map((item) =>
+    const currencyCheck = this.props.cart.map((item) =>
       item.prices.filter((item) => item.currency === this.props.price)
     );
+
+    // console.log(currencyCheck[0]);
     //extract price arrays from array
     const extractFromArr = currencyCheck.map(
       (item) => item[item.map((item, index) => index)]
     );
+
     //final result
     const PriceResult = extractFromArr.map((item) => item.amount);
-
+    console.log(PriceResult);
     //total summ
     const total =
       PriceResult.length !== 0
@@ -41,13 +42,13 @@ export class Cart extends Component {
           )
         : 0;
 
-    //Product Add Func
+    // Product Add Func
     const productQuantityAdd = (productId) => {
       //get index of product in cart
       const productIndex = this.props.cart.findIndex(
         (item) => item.id === productId
       );
-      //save price to state
+      // save price to state
       this.setState((prevState) => ({
         quantityAmount:
           prevState.quantityAmount + currencyCheck[productIndex][0].amount,
@@ -159,7 +160,7 @@ export class Cart extends Component {
 const mapStateToProps = (state) => {
   return {
     cart: state.products.cart,
-    price: state.products.price[0].currency,
+    price: state.products.price[0],
     products: state.products.data,
   };
 };
