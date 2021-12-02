@@ -13,6 +13,7 @@
 
 .smallImages {
   margin-bottom: 20px;
+  max-height: 300px;
 }
 
 .smallImages img {
@@ -124,6 +125,14 @@
   outline: none;
   border: none;
   cursor: not-allowed;
+}
+
+.attrAll {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5px;
+  align-items: center;
 }
 
 .description {

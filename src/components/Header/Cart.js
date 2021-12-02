@@ -23,7 +23,9 @@ export class Cart extends Component {
     let symbol = currencySymbol(this.props.price);
 
     return (
-      <OverLay style={{ display: this.props.lat ? "block" : "none" }}>
+      <OverLay
+        className={this.props.lat ? classes.overlayBlock : classes.overlayNone}
+      >
         <div className={classes.cartContainer}>
           <div className={classes.itemInfo}>
             <p> My bag </p>

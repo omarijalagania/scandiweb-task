@@ -3,8 +3,7 @@
   background-color: white;
   padding: 4px;
   top: 0;
-  left: 65%;
-  right: 0px;
+  right: 43px;
   width: 270px;
   -webkit-box-shadow: -1px 3px 15px -2px #000000;
   box-shadow: -1px 3px 15px -2px #e4e4e4;
@@ -164,4 +163,12 @@
   color: var(--primary-green);
   background-color: white;
   border: 1px solid var(--primary-green);
+}
+
+.overlayBlock {
+  display: block;
+}
+
+.overlayNone {
+  display: none;
 }

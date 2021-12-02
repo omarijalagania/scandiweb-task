@@ -54,6 +54,8 @@ export class MiniCart extends Component {
       this.setState({ activeBtn: index });
     };
 
+    console.log(total);
+
     //remove item from cart
     const itemRemoveHandler = (productId) => {
       const removedItem = this.props.cart.filter(
@@ -77,7 +79,12 @@ export class MiniCart extends Component {
     };
 
     //Total Price
-    this.props.totalPriceAction(total.toFixed(2));
+    this.props.totalPriceAction(
+      (total + this.state.quantity >= 1
+        ? this.state.quantityAmount
+        : 0
+      ).toFixed(2)
+    );
 
     //Product Remove Func
     const productQuantityRemove = (productId, index) => {

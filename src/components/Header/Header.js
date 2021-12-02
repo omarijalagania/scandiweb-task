@@ -108,11 +108,11 @@ export class Header extends Component {
         : "No categories";
     return (
       <div>
-        {this.state.currencyToggle === true && (
+        {this.state.currencyToggle && (
           <div className={classes.modal} onClick={test}></div>
         )}
 
-        <header onClick={test} className={classes.mainContainer}>
+        <header className={classes.mainContainer}>
           <nav className={classes.nav}>
             <ul className={classes.list}>{filteredCategories}</ul>
             <Link to="/">
