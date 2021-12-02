@@ -110,7 +110,7 @@ export class Header extends Component {
           <div className={classes.modal} onClick={test}></div>
         )}
 
-        <header className={classes.mainContainer}>
+        <header onClick={test} className={classes.mainContainer}>
           <nav className={classes.nav}>
             <ul className={classes.list}>{filteredCategories}</ul>
             <Link to="/">
