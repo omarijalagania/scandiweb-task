@@ -24,6 +24,7 @@ export class Cart extends Component {
 
     return (
       <OverLay
+        onClick={this.props.test}
         className={this.props.lat ? classes.overlayBlock : classes.overlayNone}
       >
         <div className={classes.cartContainer}>
@@ -45,7 +46,7 @@ export class Cart extends Component {
             <p>Total</p>
             <p>
               {symbol}
-              {this.props.totalPrice}
+              {this.props.cart.length !== 0 ? this.props.totalPrice : 0}
             </p>
           </div>
           <div className={classes.btns}>

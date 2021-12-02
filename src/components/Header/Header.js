@@ -154,6 +154,7 @@ export class Header extends Component {
               </div>
               {this.state.cartToggle ? (
                 <Cart
+                  test={test}
                   cartToggleHandler={cartToggleHandler}
                   lat={this.state.lat}
                 />
