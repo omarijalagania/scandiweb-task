@@ -51,7 +51,6 @@ export class CartItem extends Component {
         (item) => item.id !== productId
       );
       this.props.removeCartAction(removedItem);
-      console.log(removedItem);
     };
 
     // Product Add Func
@@ -82,7 +81,6 @@ export class CartItem extends Component {
         }));
       }
     };
-    console.log(priceResult);
 
     return (
       <div className={classes.cartContainer}>
@@ -102,7 +100,9 @@ export class CartItem extends Component {
             ></p>
             <p>
               {symbol}
-              {(+priceResult[0] + this.state.quantityAmount).toFixed(2)}
+              {(
+                priceResult[this.props.index] + this.state.quantityAmount
+              ).toFixed(2)}
             </p>
 
             <div className={classes.productSizes}>

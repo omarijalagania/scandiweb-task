@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 
 import CategoryName from "../ui/CategoryName";
 import CartItem from "./CartItem";
-import { removeCartAction } from "../../redux/actions";
 
 export class CartPage extends Component {
   render() {
