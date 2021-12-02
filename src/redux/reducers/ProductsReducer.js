@@ -6,6 +6,7 @@ const initialState = {
   singleProduct: {},
   newCart: [],
   totalPrice: 0,
+  quantity: 0,
 };
 
 const ProductsReducer = (state = initialState, action) => {
@@ -37,6 +38,13 @@ const ProductsReducer = (state = initialState, action) => {
         ...state,
         totalPrice: action.payload,
       };
+
+    case "QUANTITY":
+      return {
+        ...state,
+        quantity: action.payload,
+      };
+
     case "ADD_TO_CART":
       return {
         ...state,

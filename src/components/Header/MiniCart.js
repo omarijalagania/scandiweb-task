@@ -9,6 +9,7 @@ import classes from "./Cart.module.css";
 import { connect } from "react-redux";
 import { removeCartAction } from "../../redux/actions";
 import { totalPriceAction } from "../../redux/actions";
+import { quantityAction } from "../../redux/actions";
 
 export class MiniCart extends Component {
   state = {
@@ -33,6 +34,8 @@ export class MiniCart extends Component {
     //get changed symbol
     let symbol = currencySymbol(this.props.price);
 
+    this.props.quantityAction(this.state.quantity);
+
     //extract price arrays from array
     const extractFromArr = this.currencyCheck.map(
       (item) => item[item.map((item, index) => index)]
@@ -53,8 +56,6 @@ export class MiniCart extends Component {
     const btnActiveHandler = (index) => {
       this.setState({ activeBtn: index });
     };
-
-    console.log(total);
 
     //remove item from cart
     const itemRemoveHandler = (productId) => {
@@ -182,6 +183,7 @@ const mapDispatchToProps = () => {
   return {
     removeCartAction,
     totalPriceAction,
+    quantityAction,
   };
 };
 

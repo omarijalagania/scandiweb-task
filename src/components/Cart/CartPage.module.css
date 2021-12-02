@@ -6,6 +6,7 @@
 .cartContainer {
   width: 1098px;
   margin: 30px 0;
+  z-index: 9999;
 }
 
 .rightImage img {

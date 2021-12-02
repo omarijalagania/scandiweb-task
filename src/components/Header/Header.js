@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import { CartOutline } from "react-ionicons";
 import classes from "./Header.module.css";
 
@@ -18,11 +19,6 @@ import { ChevronUpOutline } from "react-ionicons";
 import { ChevronDownOutline } from "react-ionicons";
 
 export class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.ref = React.createRef();
-  }
-
   state = {
     currencyToggle: false,
     cartToggle: false,
@@ -48,7 +44,7 @@ export class Header extends Component {
     this.setState({ categories: response.data.category.products });
   };
 
-  toggleHandler = (event) => {
+  toggleHandler = () => {
     this.setState({
       currencyToggle: !this.state.currencyToggle,
       cartToggle: false,
@@ -60,7 +56,9 @@ export class Header extends Component {
     //icon change for currency
     let symbol = currencySymbol(this.props.price[0]);
 
-    const test = () => {
+    const test = (e) => {
+      e.stopPropagation();
+
       if (this.state.cartToggle) {
         this.setState({
           cartToggle: false,
@@ -161,12 +159,13 @@ export class Header extends Component {
               ) : (
                 ""
               )}
+
               <div
                 onClick={cartToggleHandler}
                 style={{ opacity: this.state.cartToggle ? "1" : "0" }}
                 className={classes.statusContainer}
               >
-                {this.props.cart.length >= 0 ? this.props.cart.length : "0"}
+                {this.props.quantity}
               </div>
             </div>
           </nav>
@@ -181,6 +180,7 @@ const mapStateToProps = (state) => {
     products: state.products.data,
     price: state.products.price,
     cart: state.products.cart,
+    quantity: state.products.quantity,
   };
 };
 

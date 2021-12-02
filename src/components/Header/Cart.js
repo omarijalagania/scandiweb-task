@@ -27,7 +27,10 @@ export class Cart extends Component {
         onClick={this.props.test}
         className={this.props.lat ? classes.overlayBlock : classes.overlayNone}
       >
-        <div className={classes.cartContainer}>
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className={classes.cartContainer}
+        >
           <div className={classes.itemInfo}>
             <p> My bag </p>
             <small>
@@ -72,6 +75,7 @@ const mapStateToProps = (state) => {
     price: state.products.price[0],
     products: state.products.data,
     totalPrice: state.products.totalPrice,
+    quantity: state.products.quantity,
   };
 };
 

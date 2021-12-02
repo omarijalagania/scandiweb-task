@@ -30,7 +30,7 @@ export class Product extends Component {
       this.props.cartAction(forCart);
       alert("Product added to cart");
     };
-    console.log(this.props.price);
+
     return (
       <Link
         onClick={() => this.props.getIdsAction(this.props.product.id)}

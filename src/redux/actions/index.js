@@ -46,3 +46,9 @@ export const totalPriceAction = (value) => {
     payload: value,
   };
 };
+export const quantityAction = (value) => {
+  return {
+    type: "QUANTITY",
+    payload: value,
+  };
+};

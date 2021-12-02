@@ -73,12 +73,9 @@ class ProductDetail extends Component {
     //active size btn
     const btnActiveHandler = (index) => {
       this.setState({ activeBtn: index });
-      console.log(index);
     };
 
     let symbol = currencySymbol(this.props.price);
-
-    console.log(this.state.singlePost);
 
     return this.state.singlePost !== "" ? (
       this.state.singlePost.map((item) => {
@@ -109,25 +106,6 @@ class ProductDetail extends Component {
               <div className={classes.sizes}>
                 <p>size</p>
                 <div className={classes.btnGroup}>
-                  {/* {item.attributes.length > 0 ? (
-                    item.attributes[0].items.map((size, index) => (
-                      <SizeButton
-                        onClick={btnActiveHandler.bind(null, index)}
-                        className={
-                          this.state.activeBtn === index
-                            ? classes.sizeBtnActive
-                            : classes.sizeBtnEmpty
-                        }
-                        value={size.displayValue}
-                        key={size.displayValue}
-                      >
-                        {size.displayValue}
-                      </SizeButton>
-                    ))
-                  ) : (
-                    <p>No Attributes</p>
-                  )} */}
-
                   {item.attributes.map((att, index1) => {
                     return item.attributes[index1].items.map((size, index) => (
                       <div className={classes.attrAll}>
