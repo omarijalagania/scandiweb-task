@@ -5,9 +5,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  margin: 0 auto;
   background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
-  z-index: 9999; /* Specify a stack order in case you're using a different order for other elements */
-
-  overflow: hidden;
+  z-index: 999; /* Specify a stack order in case you're using a different order for other elements */
 }

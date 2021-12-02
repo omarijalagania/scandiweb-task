@@ -56,7 +56,8 @@ export class Header extends Component {
     //icon change for currency
     let symbol = currencySymbol(this.props.price[0]);
 
-    const test = (e) => {
+    //Close cart and currency when click outside
+    const outSideClickHandler = (e) => {
       e.stopPropagation();
 
       if (this.state.cartToggle) {
@@ -107,10 +108,10 @@ export class Header extends Component {
     return (
       <div>
         {this.state.currencyToggle && (
-          <div className={classes.modal} onClick={test}></div>
+          <div className={classes.modal} onClick={outSideClickHandler}></div>
         )}
 
-        <header onClick={test} className={classes.mainContainer}>
+        <header onClick={outSideClickHandler} className={classes.mainContainer}>
           <nav className={classes.nav}>
             <ul className={classes.list}>{filteredCategories}</ul>
             <Link to="/">
@@ -152,7 +153,7 @@ export class Header extends Component {
               </div>
               {this.state.cartToggle ? (
                 <Cart
-                  test={test}
+                  outSideClickHandler={outSideClickHandler}
                   cartToggleHandler={cartToggleHandler}
                   lat={this.state.lat}
                 />
@@ -165,7 +166,7 @@ export class Header extends Component {
                 style={{ opacity: this.state.cartToggle ? "1" : "0" }}
                 className={classes.statusContainer}
               >
-                {this.props.quantity}
+                {this.props.cart.length !== 0 ? this.props.quantity : 0}
               </div>
             </div>
           </nav>

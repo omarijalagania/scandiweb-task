@@ -24,7 +24,7 @@ export class Cart extends Component {
 
     return (
       <OverLay
-        onClick={this.props.test}
+        onClick={this.props.outSideClickHandler}
         className={this.props.lat ? classes.overlayBlock : classes.overlayNone}
       >
         <div

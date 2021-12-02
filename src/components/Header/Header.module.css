@@ -1,7 +1,9 @@
 .mainContainer {
+  position: relative;
   width: 1238px;
   max-width: 100%;
   margin: 0 auto;
+  z-index: 9999;
 }
 
 .modal {
